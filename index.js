@@ -4,7 +4,7 @@ const Telegram = require('telegram-node-bot')
 const TelegramBaseController = Telegram.TelegramBaseController
 const TextCommand = Telegram.TextCommand
 const tg = new Telegram.Telegram('438965853:AAGwB7Y5g8KqM3OVjkQilBuOrvCh8s9ZqmM',{workers: 1});
-var arr = [
+var ship = [
 	'http://i.imgur.com/b7bzy0C.png',
 	'http://i.imgur.com/hse69ui.jpg',
     'http://i.imgur.com/pyjpvhM.gif',
@@ -31,7 +31,11 @@ var arr = [
     'http://i.imgur.com/h3mlvCq.png',
     'http://i.imgur.com/dXzZETc.png'
 ]
-
+var doit = [
+	'http://i.imgur.com/RPbK0fZ.png',
+	'http://i.imgur.com/TgUQfNI.jpg',
+	'http://i.imgur.com/WSm116p.jpg',
+]
 
 class shipController extends TelegramBaseController {
     /**
@@ -39,7 +43,7 @@ class shipController extends TelegramBaseController {
      */
     
     shipHandler($) {
-        $.sendMessage(arr[Math.floor(Math.random()*arr.length)])
+        $.sendMessage(ship[Math.floor(Math.random()*ship.length)])
     }
 
 
@@ -50,8 +54,24 @@ class shipController extends TelegramBaseController {
     }
 }
 
+class doController extends TelegramBaseController {
+	doHandler($) {
+		$.sendMessage(doit[Math.floor(Math.random()*doit.length)])
+	}
+
+	get routes(){
+		return{
+			'doCommand': 'doHandler'
+		}
+	}
+}
+
 tg.router
     .when(
         new TextCommand('/shipit', 'shipCommand'),
         new shipController()
     )
+	.when(
+		new TextCommand('/doit','doCommand'),
+		new doController()
+	)
