@@ -14,4 +14,3 @@ Dependencies:
 
 Usage:
 To start the bot navigate into the directory and run <code>node index.js<code/>
-
