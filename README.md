@@ -13,4 +13,4 @@ Dependencies:
 * <a href="https://nodejs.org/en/">NodeJS<a/>
 
 Usage:
-To start the bot navigate into the directory and run <code>node index.js<code/>
+To start the bot navigate into the directory and run <code>node index.js
