@@ -71,6 +71,21 @@ class doController extends TelegramBaseController {
 	}
 }
 
+class loremController extends TelegramBaseController {
+	loremHandler($) {
+		var var1 = Math.floor(Math.random()*(1080 - 400)+400)
+		var var2 = Math.floor(Math.random()*(400 - 200)+200)
+		$.sendMessage('lorempixel.com/'+var1+'/'+var2)
+		$.sendMessage('Dieses moderne und zugleich zeitlose Bild schafft es, durch seine Komposition die Einstellung des Künstlers zu der gezeigten Thematik in vielschichtiger Weise wiederzugeben.')
+	}
+
+	get routes() {
+		return{
+			'loremCommand': 'loremHandler'
+		}
+	}
+}
+
 tg.router
     .when(
         new TextCommand('/shipit', 'shipCommand'),
@@ -79,4 +94,8 @@ tg.router
 	.when(
 		new TextCommand('/doit','doCommand'),
 		new doController()
+	)
+	.when(
+		new TextCommand('/lorem','loremCommand'),
+		new loremController()
 	)
