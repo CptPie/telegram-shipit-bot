@@ -49,20 +49,14 @@ var merge = [
 	'https://i.stack.imgur.com/nEfIm.jpg',
 ]
 class shipController extends TelegramBaseController {
-    /**
-     * @param {Scope} $
-     */
-    
-    shipHandler($) {
-        $.sendMessage(ship[Math.floor(Math.random()*ship.length)])
-    }
-
-
-    get routes() {
-        return {
-            'shipCommand': 'shipHandler'
-        }
-    }
+	shipHandler($) {
+		$.sendMessage(ship[Math.floor(Math.random()*ship.length)])
+	}
+	get routes() {
+		return {
+			'shipCommand': 'shipHandler'
+		}
+	}
 }
 
 class doController extends TelegramBaseController {
@@ -84,7 +78,6 @@ class loremController extends TelegramBaseController {
 		$.sendMessage('lorempixel.com/'+var1+'/'+var2)
 		$.sendMessage('Dieses moderne und zugleich zeitlose Bild schafft es, durch seine Komposition die Einstellung des Künstlers zu der gezeigten Thematik in vielschichtiger Weise wiederzugeben.')
 	}
-
 	get routes() {
 		return{
 			'loremCommand': 'loremHandler'
@@ -96,7 +89,6 @@ class mergeController extends TelegramBaseController {
 	mergeHandler($){
 		$.sendMessage(merge[Math.floor(Math.random()*merge.length)])
 	}
-
 	get routes(){
 		return {
 			'mergeCommand': 'mergeHandler'
@@ -105,10 +97,10 @@ class mergeController extends TelegramBaseController {
 }
 
 tg.router
-    .when(
-        new TextCommand('/shipit', 'shipCommand'),
-        new shipController()
-    )
+	.when(
+		new TextCommand('/shipit', 'shipCommand'),
+		new shipController()
+	)
 	.when(
 		new TextCommand('/doit','doCommand'),
 		new doController()
