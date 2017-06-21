@@ -41,7 +41,13 @@ var doit = [
 	'http://i.imgur.com/TgUQfNI.jpg',
 	'http://i.imgur.com/WSm116p.jpg',
 ]
-
+var merge = [
+	'https://i.imgur.com/X9zNSkM.gif',
+	'https://cdn.meme.am/cache/instances/folder86/500x/64007086/disaster-girl-push-rejected-rebase-or-merge-git-push-force.jpg',
+	'https://www.mememaker.net/static/images/memes/3629643.jpg',
+	'http://s.quickmeme.com/img/58/58cdc50dcb04a16438e9759f2db7a0ac23442e718f69af7b2ac0a3761915e92a.jpg',
+	'https://i.stack.imgur.com/nEfIm.jpg',
+]
 class shipController extends TelegramBaseController {
     /**
      * @param {Scope} $
@@ -86,6 +92,18 @@ class loremController extends TelegramBaseController {
 	}
 }
 
+class mergeController extends TelegramBaseController {
+	mergeHandler($){
+		$.sendMessage(merge[Math.floor(Math.random()*merge.length)])
+	}
+
+	get routes(){
+		return {
+			'mergeCommand': 'mergeHandler'
+		}
+	}
+}
+
 tg.router
     .when(
         new TextCommand('/shipit', 'shipCommand'),
@@ -98,4 +116,8 @@ tg.router
 	.when(
 		new TextCommand('/lorem','loremCommand'),
 		new loremController()
+	)
+	.when(
+		new TextCommand('/merge','mergeCommand'),
+		new mergeController()
 	)
