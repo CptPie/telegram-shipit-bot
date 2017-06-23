@@ -1,5 +1,5 @@
 # telegram-shipit-bot
-Simple telegram bo with basic Message and picture sending capabilities.
+Simple telegram bot with basic Message and picture sending capabilities.
 
 # Users
 Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
