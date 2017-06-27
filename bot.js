@@ -89,3 +89,15 @@ bot.onText(/\/merge/,(msg) => {
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, merge[Math.floor(Math.random()*merge.length)]);
 });
+
+var j = schedule.scheduleJob('6 * * *', function(){
+	bot.sendMessage(278607955, 'Todays weather forecast:');
+	bot.sendPhoto(278607955, 'wttr.in/Bamberg.png');
+});
+
+bot.onText(/\/weather (.+)/, (msg, input) => {
+	const chatId = msg.chat.id;
+	var loc = input[1];
+	bot.sendMessage(chatId,'Weather in '+loc+':');
+	bot.sendPhoto(chatId,('wttr.in/'+loc+'.png'));
+});
