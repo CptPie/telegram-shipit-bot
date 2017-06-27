@@ -16,9 +16,9 @@ Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
 ## Usage
 The bash script "make.sh" is managing the dependencies and starts the bot.
 Following arguments shall be used:
-- ./make -> Starts the bot and does not check for dependencies
-- ./make -d -> Downloads all dependencies
-- ./make -a -> Downloads all dependencies and starts the bot
+- ./make.sh -> Starts the bot and does not check for dependencies
+- ./make.sh -d -> Downloads all dependencies
+- ./make.sh -a -> Downloads all dependencies and starts the bot
 
 ## Adding a dependency
 If you want to add a dependency, simple add the name of the dependency to the array "dependencies" in the function "downloadDependencies"\
