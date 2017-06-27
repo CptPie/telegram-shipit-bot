@@ -5,7 +5,7 @@ const schedule = require('node-schedule');
 const token = '<YOUR TOKEN>'
 const bot = new TelegramBot(token, {polling: true})
 var ChatId = '<YOUR CHATID>';
-var daily-loc = '<YOUR LOCATION FOR DAILY WEATHER>';
+var dailyloc = '<YOUR LOCATION FOR DAILY WEATHER>';
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
@@ -94,8 +94,8 @@ bot.onText(/\/merge/,(msg) => {
 });
 
 var j = schedule.scheduleJob('6 * * *', function(){
-	bot.sendMessage(ChatId, 'Todays weather forecast for'+daily-loc+':');
-	bot.sendPhoto(ChatId, 'wttr.in/'+daily-loc+'.png');
+	bot.sendMessage(ChatId, 'Todays weather forecast for'+dailyloc+':');
+	bot.sendPhoto(ChatId, 'wttr.in/'+dailyloc+'.png');
 });
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
