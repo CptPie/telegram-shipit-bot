@@ -1,11 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
 const schedule = require('node-schedule');
+var obj = require('./config');
 
-const token = '<YOUR TOKEN>'
+const token = 'obj.bottoken'
 const bot = new TelegramBot(token, {polling: true})
-var ChatId = '<YOUR CHATID>';
-var dailyloc = '<YOUR LOCATION FOR DAILY WEATHER>';
+var ChatId = 'obj.dailyChatId';
+var dailyloc = 'obj.dailyLocation';
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
