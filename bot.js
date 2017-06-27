@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
+const schedule = require('node-schedule');
 
 const token = '<YOUR TOKEN>'
 const bot = new TelegramBot(token, {polling: true})
