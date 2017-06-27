@@ -19,7 +19,7 @@ fi
 ####################
 
 # Downloads every dependency via npm
-# Therefore, every dependency has be listen in the array "dependencies", seperated by a whitespace
+# Therefore, every dependency has be listet in the array "dependencies", seperated by a whitespace
 function downloadDependencies {
 	echo "Downloading dependencies"
 
