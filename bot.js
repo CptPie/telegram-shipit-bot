@@ -104,3 +104,9 @@ bot.onText(/\/weather (.+)/, (msg, input) => {
 	bot.sendMessage(chatId,'Weather in '+loc+':');
 	bot.sendPhoto(chatId,('wttr.in/'+loc+'.png'));
 });
+
+bot.onText(/\/decide (.+)/, (msg, input) => {
+	const chatID = msg.chat.id;
+	var answer = Math.random() >= 0.5 ? "Yes" : "No";
+	bot.sendMessage(chatID, input[1] + ": " + answer);
+});
