@@ -1,6 +1,6 @@
 # telegram-shipit-bot
 Simple telegram bot with basic Message and picture sending capabilities.
-The bot also sends daily at 6:00 am the weather forecast for the provided location.
+The bot also sends daily at 6:00 am the weather forecast for the provided location (see var daily-loc) at the provided chat id (see var ChatId).
 
 # Users
 Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
