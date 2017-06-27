@@ -108,5 +108,5 @@ bot.onText(/\/weather (.+)/, (msg, input) => {
 bot.onText(/\/decide (.+)/, (msg, input) => {
 	const chatID = msg.chat.id;
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
-	bot.sendMessage(chatID, input[1] + ": " + answer);
+	bot.sendMessage(chatID, input[1] + " " + answer);
 });
