@@ -3,6 +3,8 @@ const request = require('request');
 
 const token = '<YOUR TOKEN>'
 const bot = new TelegramBot(token, {polling: true})
+var ChatId = '<YOUR CHATID>';
+var daily-loc = '<YOUR LOCATION FOR DAILY WEATHER>';
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
@@ -91,9 +93,8 @@ bot.onText(/\/merge/,(msg) => {
 });
 
 var j = schedule.scheduleJob('6 * * *', function(){
-	var ChatId = '<YOUR CHATID>';
-	bot.sendMessage(ChatId, 'Todays weather forecast:');
-	bot.sendPhoto(ChatId, 'wttr.in/Bamberg.png');
+	bot.sendMessage(ChatId, 'Todays weather forecast for'+daily-loc+':');
+	bot.sendPhoto(ChatId, 'wttr.in/'+daily-loc+'.png');
 });
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
