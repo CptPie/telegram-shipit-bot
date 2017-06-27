@@ -11,14 +11,19 @@ Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
 * /merge - sends a random merge meme picture
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
 
+# Build-Script
+## Usage
+The bash script "make.sh" is managing the dependencies and starts the bot.
+Following arguments shall be used:
+- ./make -> Starts the bot and does not check for dependencies
+- ./make -d -> Downloads all dependencies
+- ./make -a -> Downloads all dependencies and starts the bot
 
-# Devs
+## Adding a dependency
+If you want to add a dependency, simple add the name of the dependency to the array "dependencies" in the function "downloadDependencies"\
+Example: `local dependencies=(node-telegram-bot-api request node-schedule)` downloads following dependencies
+- node-telegram-bot-api
+- request
+- node-scheduler
 
-Dependencies: 
-* <a href="https://github.com/yagop/node-telegram-bot-api">node-telegram-bot-api<a/>
-* <a href="https://github.com/request/request">request<a/>
-* <a href="https://nodejs.org/en/">NodeJS<a/>
-* <a href="https://www.npmjs.com/package/node-schedule">node-schedule<a/>
-
-Usage:
-To start the bot navigate into the directory and run ```node bot.js```
+All dependencies are seperated by a whitespace character
