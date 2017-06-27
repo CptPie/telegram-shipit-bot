@@ -10,6 +10,7 @@ Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
 * /lorem - sends a random picture from lorempixel.com
 * /merge - sends a random merge meme picture
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
+* /decide <Question> - answers a yes/no question
 
 # Build-Script
 ## Usage
