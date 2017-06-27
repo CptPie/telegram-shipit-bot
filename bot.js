@@ -1,12 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
 const schedule = require('node-schedule');
-var obj = require('./config');
+var config = require('./config');
 
-const token = 'obj.bottoken'
+const token = config.bottoken;
 const bot = new TelegramBot(token, {polling: true})
-var ChatId = 'obj.dailyChatId';
-var dailyloc = 'obj.dailyLocation';
+var ChatId = config.dailyChatId;
+var dailyloc = config.dailyLocation;
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
@@ -94,7 +94,7 @@ bot.onText(/\/merge/,(msg) => {
 	bot.sendMessage(chatId, merge[Math.floor(Math.random()*merge.length)]);
 });
 
-var j = schedule.scheduleJob('6 * * *', function(){
+var j = schedule.scheduleJob('28 21 * * *', function(){
 	bot.sendMessage(ChatId, 'Todays weather forecast for'+dailyloc+':');
 	bot.sendPhoto(ChatId, 'wttr.in/'+dailyloc+'.png');
 });

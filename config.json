@@ -1,5 +1,5 @@
 {
-	"bottoken": "438965853:AAH5MWU9jNNskrjYD4ypM6GbLry1gvPj_10",
-	"dailyChatId": "-1001076729553",
-	"dailyLocation": "bamberg"
+	"bottoken": "YOUR TOKEN",
+	"dailyChatId": "YOUR DESIRED CHATID",
+	"dailyLocation": "YOUR DESIRED LOCATION"
 }
