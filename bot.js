@@ -91,8 +91,9 @@ bot.onText(/\/merge/,(msg) => {
 });
 
 var j = schedule.scheduleJob('6 * * *', function(){
-	bot.sendMessage(278607955, 'Todays weather forecast:');
-	bot.sendPhoto(278607955, 'wttr.in/Bamberg.png');
+	var ChatId = '<YOUR CHATID>';
+	bot.sendMessage(ChatId, 'Todays weather forecast:');
+	bot.sendPhoto(ChatId, 'wttr.in/Bamberg.png');
 });
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
