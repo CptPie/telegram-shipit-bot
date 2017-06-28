@@ -5,7 +5,6 @@ var config = require('./config');
 
 const token = config.bottoken;
 const bot = new TelegramBot(token, {polling: true})
-var ChatId = config.dailyChatId;
 var dailyloc = config.dailyLocation;
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
@@ -94,9 +93,9 @@ bot.onText(/\/merge/,(msg) => {
 	bot.sendMessage(chatId, merge[Math.floor(Math.random()*merge.length)]);
 });
 
-var j = schedule.scheduleJob('28 21 * * *', function(){
-	bot.sendMessage(ChatId, 'Todays weather forecast for'+dailyloc+':');
-	bot.sendPhoto(ChatId, 'wttr.in/'+dailyloc+'.png');
+var j = schedule.scheduleJob('30 5 * * *', function(){
+	bot.sendMessage(config.dailyChatId, 'Todays weather forecast for '+dailyloc+':');
+	bot.sendPhoto(config.dailyChatId, 'wttr.in/'+dailyloc+'.png');
 });
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
