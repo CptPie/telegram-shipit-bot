@@ -88,6 +88,11 @@ var merge = [
 	'https://i.stack.imgur.com/nEfIm.jpg',
 ]
 
+bot.onText(/\/💩/,(msg) => {
+	const chatId = msg.chat.id;
+	bot.sendMessage(chatId, 'Kothaufen');
+});
+
 bot.onText(/\/merge/,(msg) => {
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, merge[Math.floor(Math.random()*merge.length)]);
