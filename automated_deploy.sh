@@ -1,3 +1,5 @@
+./make.sh -a &
+
 while [ 1 ]; do
         git fetch origin
         reslog=$(git log HEAD..origin/master --oneline)
