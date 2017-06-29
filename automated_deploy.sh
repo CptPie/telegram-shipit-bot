@@ -7,6 +7,7 @@ while [ 1 ]; do
                 echo ">> Killing current 'node bot.js' process"
                 echo "..."
                 pkill -f "./make.sh"
+                pkill -f "node ./bot.js"
                 echo ">> Process killed"
                 echo ">> Merging changed"
                 echo "..."
