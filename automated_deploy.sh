@@ -11,6 +11,7 @@ while [ 1 ]; do
                 echo ">> Merging changed"
                 echo "..."
                 git merge origin/master
+                sleep 10s
                 echo ">> Starting Bot again \n"
                 ./make.sh -a &
         fi
