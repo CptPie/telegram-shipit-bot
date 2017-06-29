@@ -151,7 +151,7 @@ var j = schedule.scheduleJob('30 5 * * *', function(){
 
 var downloader = function(uri, filename, callback){
 	request.head(uri, function(err, res, body){
-		request(uri).pipe(fs.createWriteStream(filename)).on('close',callback);
+		request(uri).pipe(fs.createWriteStream(filename)).on('finish',callback);
 	});
 };
 
@@ -160,9 +160,8 @@ bot.onText(/\/weather (.+)/, (msg, input) => {
 	var loc = input[1];
 	downloader('http://wttr.in/'+loc+'.png?1', 'wetter.png',function(){
 		console.log('done');
+		sendingWeather(chatId,loc);
 	});
-	var photo = __dirname+'/wetter.png';
-	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
 });
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
@@ -171,15 +170,16 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
 	bot.sendMessage(chatID, input[1] + " " + answer);
 });
 
-/* ###################################### DEV GRID #################################*/
-
-
-
-
-
-
-
-
-
-
-
+bot.onText(/\/marius/, (msg) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
+});
+bot.onText(/\/slap (.+)/, (msg,input) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>",{parse_mode : "HTML"});
+});
+function sendingWeather(chatId,loc){
+	console.log("sending");
+	var photo = __dirname+'/wetter.png';
+	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
+}

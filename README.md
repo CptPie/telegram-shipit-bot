@@ -11,6 +11,8 @@ Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
 * /merge - sends a random merge meme picture
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
 * /decide \<question> - answers a yes/no question
+* /marius - burn the witch!
+* /slap [name] - slaps [name] around a bit with a large trout
 
 # Build-Script
 ## Usage
