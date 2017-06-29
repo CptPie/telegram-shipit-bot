@@ -23,7 +23,7 @@ fi
 function downloadDependencies {
 	echo "Downloading dependencies"
 
-	local dependencies=(node-telegram-bot-api request node-schedule)
+	local dependencies=(node-telegram-bot-api request node-schedule fs)
 
 	for dependency in "${dependencies[@]}"; do
 		npm install $dependency
