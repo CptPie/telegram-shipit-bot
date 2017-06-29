@@ -81,6 +81,51 @@ bot.onText(/\/ship/,(msg) =>{
 	bot.sendMessage(chatId, ship[Math.floor(Math.random()*ship.length)]);
 });
 
+var editions = [
+	{short:'an', count:92},
+	{short:'lg', count:310},
+	{short:'dk', count:119},
+	{short:'fe', count:187},
+	{short:'hl', count:140},
+	{short:'mr', count:350},
+	{short:'vi', count:167},
+	{short:'wl', count:167},
+	{short:'tp', count:350},
+	{short:'sh', count:167},
+	{short:'ex', count:167},
+	{short:'us', count:350},
+	{short:'ul', count:143},
+	{short:'ud', count:143},
+	{short:'mm', count:350},
+	{short:'ne', count:143},
+	{short:'pr', count:143},
+	{short:'in', count:355},
+	{short:'ps', count:146},
+	{short:'ap', count:148},
+	{short:'od', count:350},
+	{short:'tr', count:143},
+	{short:'ju', count:143},
+	{short:'on', count:350},
+	{short:'le', count:145},
+	{short:'sc', count:143},
+	{short:'be', count:302},
+	{short:'ug', count:88},
+	{short:'po2', count:165},
+	{short:'po', count:222},
+	{short:'p3k', count:180},
+	{short:'ced', count:302},
+	{short:'cedi', count:302},
+]
+
+bot.onText(/\/draw/, (msg) =>{
+	const chatId = msg.chat.id;
+	let edition = editions[Math.floor(Math.random()*editions.length)];
+	bot.sendMessage(chatId,`http://magiccards.info/scans/en/${edition.short}/${Math.floor(Math.random()*edition.count)}.jpg`);
+});
+
+
+
+
 var merge = [
 	'https://i.imgur.com/X9zNSkM.gif',
 	'https://cdn.meme.am/cache/instances/folder86/500x/64007086/disaster-girl-push-rejected-rebase-or-merge-git-push-force.jpg',
@@ -89,13 +134,18 @@ var merge = [
 	'https://i.stack.imgur.com/nEfIm.jpg',
 ]
 
+bot.onText(/\/💩/,(msg) => {
+	const chatId = msg.chat.id;
+	bot.sendMessage(chatId, 'Kothaufen');
+});
+
 bot.onText(/\/merge/,(msg) => {
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, merge[Math.floor(Math.random()*merge.length)]);
 });
 
-var j = schedule.scheduleJob('28 21 * * *', function(){
-	bot.sendMessage(config.dailyChatId, 'Todays weather forecast for'+dailyloc+':');
+var j = schedule.scheduleJob('30 5 * * *', function(){
+	bot.sendMessage(config.dailyChatId, 'Todays weather forecast for '+dailyloc+':');
 	bot.sendPhoto(config.dailyChatId, 'wttr.in/'+dailyloc+'.png');
 });
 
