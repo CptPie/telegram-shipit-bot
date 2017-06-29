@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ./make.sh -a &
 
 while [ 1 ]; do
