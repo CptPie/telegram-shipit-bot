@@ -6,7 +6,7 @@ while [ 1 ]; do
         if [ "${reslog}" != "" ]; then
                 echo "\n"
                 echo ">> New version available\n"
-                echo ">> Killing current 'node bot.js' process"
+                echo ">> Killing current 'node bot.js' and './make.sh' process"
                 echo "..."
                 pkill -f "./make.sh"
                 pkill -f "node ./bot.js"
