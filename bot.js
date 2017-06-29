@@ -165,3 +165,7 @@ bot.onText(/\/marius/, (msg) => {
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 });
+bot.onText(/\/slap (.+)/, (msg,input) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>",{parse_mode : "HTML"});
+});
