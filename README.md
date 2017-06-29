@@ -22,6 +22,11 @@ Following arguments shall be used:
 - ./make.sh -d -> Downloads all dependencies
 - ./make.sh -a -> Downloads all dependencies and starts the bot
 
+# For Server-Maintainer
+There is a shell script called "automated_deploy.sh".\
+This script starts the bot and waits for an update in the master branch. If an update is available, the bot process will be killed, the update will be merged and the bot will be started again.\
+If no update is available, your bot just works as expected.
+
 ## Adding a dependency
 If you want to add a dependency, simple add the name of the dependency to the array "dependencies" in the function "downloadDependencies"\
 Example: `local dependencies=(node-telegram-bot-api request node-schedule)` downloads following dependencies
