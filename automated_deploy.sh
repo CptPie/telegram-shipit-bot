@@ -3,10 +3,10 @@ while [ 1 ]; do
         reslog=$(git log HEAD..origin/master --oneline)
         if [ "${reslog}" != "" ]; then
                 echo "\n"
-                echo ">> New version avaiable\n"
+                echo ">> New version available\n"
                 echo ">> Killing current 'node bot.js' process"
-                # ToDo: kill current node.js process
                 echo "..."
+                pkill -f "./make.sh"
                 echo ">> Process killed"
                 echo ">> Merging changed"
                 echo "..."
