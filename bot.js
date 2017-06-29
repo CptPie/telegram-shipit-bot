@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
 const schedule = require('node-schedule');
+const fs = require('fs');
 var config = require('./config');
 
 const token = config.bottoken;
@@ -148,11 +149,21 @@ var j = schedule.scheduleJob('30 5 * * *', function(){
 	bot.sendPhoto(config.dailyChatId, 'wttr.in/'+dailyloc+'.png');
 });
 
+var downloader = function(uri, filename, callback){
+	request.head(uri, function(err, res, body){
+		request(uri).pipe(fs.createWriteStream(filename)).on('close',callback);
+		fs.close();
+	});
+};
+
 bot.onText(/\/weather (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
 	var loc = input[1];
-	bot.sendMessage(chatId,'Weather in '+loc+':');
-	bot.sendPhoto(chatId,('wttr.in/'+loc+'.png'));
+	downloader('http://wttr.in/'+loc+'.png?1', 'wetter.png',function(){
+		console.log('done');
+	});
+	var photo = __dirname+'/wetter.png';
+	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
 });
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
