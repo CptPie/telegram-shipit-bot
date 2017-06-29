@@ -160,3 +160,8 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
 	bot.sendMessage(chatID, input[1] + " " + answer);
 });
+
+bot.onText(/\/marius/, (msg) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
+});
