@@ -226,7 +226,7 @@ bot.onText(/\/papier/, (msg) =>{
 	}
 });
 
-var userdieichkenne [
+var userdieichkenne = [
 	'Laumi',
 	'xAndy',
 	'Hahniel',
