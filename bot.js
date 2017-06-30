@@ -145,8 +145,9 @@ bot.onText(/\/merge/,(msg) => {
 });
 
 var j = schedule.scheduleJob('30 5 * * *', function(){
-	bot.sendMessage(config.dailyChatId, 'Todays weather forecast for '+dailyloc+':');
-	bot.sendPhoto(config.dailyChatId, 'wttr.in/'+dailyloc+'.png');
+	downloader('http://wttr.in/'+dailyloc+'.png?1', 'dailywetter.png',function(){
+		sendingWeather(config.dailyChatId,dailyloc,__dirname+'/dailywetter.png');
+	});
 });
 
 var downloader = function(uri, filename, callback){
@@ -159,8 +160,7 @@ bot.onText(/\/weather (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
 	var loc = input[1];
 	downloader('http://wttr.in/'+loc+'.png?1', 'wetter.png',function(){
-		console.log('done');
-		sendingWeather(chatId,loc);
+		sendingWeather(chatId,loc,__dirname+'/wetter.png');
 	});
 });
 
@@ -178,8 +178,6 @@ bot.onText(/\/slap (.+)/, (msg,input) => {
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>",{parse_mode : "HTML"});
 });
-function sendingWeather(chatId,loc){
-	console.log("sending");
-	var photo = __dirname+'/wetter.png';
+function sendingWeather(chatId,loc, photo){
 	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
 }
