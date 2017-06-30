@@ -189,7 +189,7 @@ bot.onText(/\/hype/, (msg) =>{
 
 var geste = [
 	'Schere',
-	'Stein'
+	'Stein',
 	'Papier',
 	]
 
@@ -224,4 +224,29 @@ bot.onText(/\/papier/, (msg) =>{
 	} else {
 		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat ein Unentschieden erzielt')
 	}
+});
+
+var userdieichkenne [
+	'Laumi',
+	'xAndy',
+	'Hahniel',
+	'Fabian',
+	'Anna',
+	'Marius',
+	'Florian',
+	'Michael',
+	'Manuel',
+	'Konstantin',
+	'anon-kun',
+	'Dennis',
+	'Jonas nicht-M.',
+	'Jonas M.',
+	'Christian',
+	'M3T4',
+	'ShipIt-Bot',
+	'Darkpilot',
+]
+bot.onText(/\/wer/, (msg) => {
+	let name = userdieichkenne[Math.floor(Math.random()*userdieichkenne.length)]
+	bot.sendMessage(msg.chat.id, name+' '+input[1]);
 });
