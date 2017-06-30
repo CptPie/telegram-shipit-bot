@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
 const schedule = require('node-schedule');
+const fs = require('fs');
 var config = require('./config');
 
 const token = config.bottoken;
@@ -144,15 +145,23 @@ bot.onText(/\/merge/,(msg) => {
 });
 
 var j = schedule.scheduleJob('30 5 * * *', function(){
-	bot.sendMessage(config.dailyChatId, 'Todays weather forecast for '+dailyloc+':');
-	bot.sendPhoto(config.dailyChatId, 'wttr.in/'+dailyloc+'.png');
+	downloader('http://wttr.in/'+dailyloc+'.png?1', 'dailywetter.png',function(){
+		sendingWeather(config.dailyChatId,dailyloc,__dirname+'/dailywetter.png');
+	});
 });
+
+var downloader = function(uri, filename, callback){
+	request.head(uri, function(err, res, body){
+		request(uri).pipe(fs.createWriteStream(filename)).on('finish',callback);
+	});
+};
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
 	const chatId = msg.chat.id;
 	var loc = input[1];
-	bot.sendMessage(chatId,'Weather in '+loc+':');
-	bot.sendPhoto(chatId,('wttr.in/'+loc+'.png'));
+	downloader('http://wttr.in/'+loc+'.png?1', 'wetter.png',function(){
+		sendingWeather(chatId,loc,__dirname+'/wetter.png');
+	});
 });
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
@@ -160,3 +169,25 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
 	bot.sendMessage(chatID, input[1] + " " + answer);
 });
+
+bot.onText(/\/marius/, (msg) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
+});
+bot.onText(/\/slap (.+)/, (msg,input) => {
+	const chatID = msg.chat.id;
+	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>",{parse_mode : "HTML"});
+});
+function sendingWeather(chatId,loc, photo){
+	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
+};
+
+bot.onText(/\/hype/, (msg) =>{
+	bot.sendMessage(msg.chat.id, msg.from.first_name+' started a HYPE-Train!');
+	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
+});
+
+
+
+
+
