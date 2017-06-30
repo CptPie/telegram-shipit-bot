@@ -189,7 +189,7 @@ bot.onText(/\/hype/, (msg) =>{
 
 var geste = [
 	'Schere',
- 	'Stein',
+	'Stein',
 	'Papier',
 	]
 
@@ -199,7 +199,7 @@ bot.onText(/\/schere/, (msg) =>{
     		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat ein Unentschieden erzielt');
 	} else if (geste == 'Stein') {
     		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat verloren');
-=	} else {
+	} else {
 		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat GEWONNEN');
 	}
 });
