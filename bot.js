@@ -189,39 +189,64 @@ bot.onText(/\/hype/, (msg) =>{
 
 var geste = [
 	'Schere',
-	'Stein'
+	'Stein',
 	'Papier',
 	]
 
 bot.onText(/\/schere/, (msg) =>{
-	let geste = geste[Math.floor(Math.random()*geste.length)]
+	let geste = geste[Math.floor(Math.random()*geste.length)];
 	if (geste == 'Schere') {
-    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat ein Unentschieden erzielt');
 	} else if (geste == 'Stein') {
-    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat verloren')
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat verloren');
 	} else {
-		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat GEWONNEN')
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat GEWONNEN');
 	}
 });
 
 bot.onText(/\/stein/, (msg) =>{
-	let geste = geste[Math.floor(Math.random()*geste.length)]
+	let geste = geste[Math.floor(Math.random()*geste.length)];
 	if (geste == 'Schere') {
-    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat GEWONNEN')
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat GEWONNEN');
 	} else if (geste == 'Stein') {
-    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat ein Unentschieden erzielt');
 	} else {
-		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat verloren')
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat verloren');
 	}
 });
 
 bot.onText(/\/papier/, (msg) =>{
-	let geste = geste[Math.floor(Math.random()*geste.length)]
+	let geste = geste[Math.floor(Math.random()*geste.length)];
 	if (geste == 'Schere') {
-    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat verloren')
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat verloren');
 	} else if (geste == 'Stein') {
-    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat GEWONNEN')
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat GEWONNEN');
 	} else {
-		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat ein Unentschieden erzielt');
 	}
+});
+
+var userdieichkenne [
+	'Laumi',
+	'xAndy',
+	'Hahniel',
+	'Fabian',
+	'Anna',
+	'Marius',
+	'Florian',
+	'Michael',
+	'Manuel',
+	'Konstantin',
+	'anon-kun',
+	'Dennis',
+	'Jonas nicht-M.',
+	'Jonas M.',
+	'Christian',
+	'M3T4',
+	'ShipIt-Bot',
+	'Darkpilot',
+]
+bot.onText(/\/wer/, (msg) => {
+	let name = userdieichkenne[Math.floor(Math.random()*userdieichkenne.length)];
+	bot.sendMessage(msg.chat.id, name+' '+input[1]);
 });
