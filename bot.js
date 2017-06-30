@@ -149,7 +149,7 @@ var j = schedule.scheduleJob('30 5 * * *', function(){
 		sendingWeather(config.dailyChatId,dailyloc,__dirname+'/dailywetter.png');
 	});
 });
-
+msg.from.first_name
 var downloader = function(uri, filename, callback){
 	request.head(uri, function(err, res, body){
 		request(uri).pipe(fs.createWriteStream(filename)).on('finish',callback);
@@ -187,7 +187,41 @@ bot.onText(/\/hype/, (msg) =>{
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
 });
 
+var geste = [
+	'Schere',
+	'Stein'
+	'Papier',
+	]
 
+bot.onText(/\/schere/, (msg) =>{
+	let geste = geste[Math.floor(Math.random()*geste.length)]
+	if (geste == 'Schere') {
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+	} else if (geste == 'Stein') {
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat verloren')
+	} else {
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat GEWONNEN')
+	}
+});
 
+bot.onText(/\/stein/, (msg) =>{
+	let geste = geste[Math.floor(Math.random()*geste.length)]
+	if (geste == 'Schere') {
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat GEWONNEN')
+	} else if (geste == 'Stein') {
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+	} else {
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat verloren')
+	}
+});
 
-
+bot.onText(/\/papier/, (msg) =>{
+	let geste = geste[Math.floor(Math.random()*geste.length)]
+	if (geste == 'Schere') {
+    		bot.sendMessage(msg.chat.id, 'Schere, '+msg.from.first_name+' hat verloren')
+	} else if (geste == 'Stein') {
+    		bot.sendMessage(msg.chat.id, 'Stein, '+msg.from.first_name+' hat GEWONNEN')
+	} else {
+		bot.sendMessage(msg.chat.id, 'Papier, '+msg.from.first_name+' hat ein Unentschieden erzielt')
+	}
+});
