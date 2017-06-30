@@ -149,7 +149,7 @@ var j = schedule.scheduleJob('30 5 * * *', function(){
 		sendingWeather(config.dailyChatId,dailyloc,__dirname+'/dailywetter.png');
 	});
 });
-msg.from.first_name
+
 var downloader = function(uri, filename, callback){
 	request.head(uri, function(err, res, body){
 		request(uri).pipe(fs.createWriteStream(filename)).on('finish',callback);
