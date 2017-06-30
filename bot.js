@@ -180,4 +180,14 @@ bot.onText(/\/slap (.+)/, (msg,input) => {
 });
 function sendingWeather(chatId,loc, photo){
 	bot.sendPhoto(chatId, photo, {caption: "Todays weather forecast for: "+loc});
-}
+};
+
+bot.onText(/\/hype/, (msg) =>{
+	bot.sendMessage(msg.chat.id, msg.from.first_name+' started a HYPE-Train!');
+	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
+});
+
+
+
+
+
