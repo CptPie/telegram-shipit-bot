@@ -187,6 +187,11 @@ bot.onText(/\/hype/, (msg) =>{
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
 });
 
+bot.onText(/\/choose (.+), (.+)/,(msg, input) => {
+	var answer = Math.random() >= 0.5 ? input[1] : input[2];
+	bot.sendMessage(msg.chat.id, "@shipitbot has chosen "+answer+" for "+msg.chat.first_name);
+});
+
 var geste = [
 	'Schere',
 	'Stein',
