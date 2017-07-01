@@ -189,7 +189,7 @@ bot.onText(/\/hype/, (msg) =>{
 
 bot.onText(/\/choose (.+), (.+)/,(msg, input) => {
 	var answer = Math.random() >= 0.5 ? input[1] : input[2];
-	bot.sendMessage(msg.chat.id, "@shipitbot has chosen "+answer+" for "+msg.chat.first_name);
+	bot.sendMessage(msg.chat.id, "@shipitbot has chosen "+answer+" for "+msg.from.first_name);
 });
 
 var geste = [
