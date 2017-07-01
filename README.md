@@ -4,18 +4,19 @@ The bot also sends daily at 6:00 am the weather forecast for the provided locati
 
 # Users
 Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
+* /choose [option1], [option2] - chooses one of the options
 * /decide \<question> - answers a yes/no question
 * /doit - sends a random picture related to the phrase "do it"
-+ /draw - gets a random card from the early years of magic the gathering, cudos an magiccards.info
+* /draw - gets a random card from the early years of magic the gathering, cudos an magiccards.info
 * /greet [name] - greets the given name "Hello, [name]" 
 * /lorem - sends a random picture from lorempixel.com
 * /marius - burn the witch!
 * /merge - sends a random merge meme picture
-+ /papier - spielt schere/stein/papier mit dem Bot
-+ /schere - spielt schere/stein/papier mit dem Bot
+* /papier - plays rock/paper/scissors with the bot
++ /schere - plays rock/paper/scissors with the bot
 * /shipit - sends a random picture related to the phrase "ship it"
 * /slap [name] - slaps [name] around a bit with a large trout
-+ /stein - spielt schere/stein/papier mit dem Bot
+* /stein - plays rock/paper/scissors with the bot
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
 + /wer [text] - '/wer hat an der Uhr gedreht' => '[RandomNameAusArray] hat an der Uhr gedreht'
 
