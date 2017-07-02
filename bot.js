@@ -231,27 +231,24 @@ bot.onText(/\/papier/, (msg) =>{
 	}
 });
 
-var userdieichkenne =[
-	'Laumi',
-	'xAndy',
-	'Hahniel',
-	'Fabian',
-	'Anna',
-	'Marius',
-	'Florian',
-	'Michael',
-	'Manuel',
-	'Konstantin',
-	'anon-kun',
-	'Dennis',
-	'Jonas nicht-M.',
-	'Jonas M.',
-	'Christian',
-	'M3T4',
-	'ShipIt-Bot',
-	'Darkpilot',
-]
-bot.onText(/\/wer (.+)/, (msg, input) =>{
-	let usernamedenichkenne = userdieichkenne[Math.floor(Math.random()*userdieichkenne.length)];
-	bot.sendMessage(msg.chat.id, ''+usernamedenichkenne+' '+input[1]);
+bot.onText(/\/register/, (msg) => {
+	var username = msg.from.username;
+	var firstname =msg.from.first_name;
+	var myObject=require('./users');	
+	for (i in myObject.users){
+		if (myObject.users[i].username==username){
+			var contains = true;
+		};
+	};
+	if (!contains){
+		myObject['users'].push({'username': username,'first': firstname});
+	};
+	var json = JSON.stringify(myObject);
+	fs.writeFile('users.json',json);
+});
+
+bot.onText(/\/who (.+)/, (msg, input) =>{
+	var users=require('./users')
+	username = users.users[Math.floor(Math.random()*Object.keys(users.users).length)].first;
+	bot.sendMessage(msg.chat.id, ''+username+' '+input[1]);
 });
