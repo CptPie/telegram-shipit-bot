@@ -1,0 +1,7 @@
+{
+	"sign":[
+		{"name": "scissors"},
+		{"name": "rock"},
+		{"name": "paper"}
+	]
+}
