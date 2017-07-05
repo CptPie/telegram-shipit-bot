@@ -4,20 +4,20 @@ The bot also sends daily at 6:00 am the weather forecast for the provided locati
 
 # Users
 Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
+* /burn - burn the witch!
 * /choose [option1], [option2] - chooses one of the options
 * /decide \<question> - answers a yes/no question
 * /doit - sends a random picture related to the phrase "do it"
 * /draw - gets a random card from the early years of magic the gathering, cudos an magiccards.info
 * /greet [name] - greets the given name "Hello, [name]" 
 * /lorem - sends a random picture from lorempixel.com
-* /marius - burn the witch!
 * /merge - sends a random merge meme picture
-* /papier - plays rock/paper/scissors with the bot
+* /paper - plays rock/paper/scissors with the bot
 * /register - registers a user for usage in the /who method
-* /schere - plays rock/paper/scissors with the bot
+* /rock - plays rock/paper/scissors with the bot
+* /scissors - plays rock/paper/scissors with the bot
 * /shipit - sends a random picture related to the phrase "ship it"
 * /slap [name] - slaps [name] around a bit with a large trout
-* /stein - plays rock/paper/scissors with the bot
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
 * /who [text] - returns a random name from registered users (see /register) and the provided text e.g. 'CptPie [text]'
 
