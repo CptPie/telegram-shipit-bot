@@ -6,7 +6,23 @@ const config = require('./config');
 const bot = new TelegramBot(config.bottoken, {polling: true})
 const contents = require('./contents')
 
+function saveUser(username, firstname){
+	var myObject=require('./users');	
+	for (i in myObject.users){
+		if (myObject.users[i].username==username){
+			var contains = true;
+		};
+	};
+	if (!contains){
+		myObject['users'].push({'username': username,'first': firstname});
+	};
+	var json = JSON.stringify(myObject);
+	fs.writeFile('users.json',json);
+};
+
+
 bot.onText(/\/greet (.+)/, (msg, input) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
 	var blub = input[1];
 	var resp ='Hello, '+blub;
@@ -14,6 +30,7 @@ bot.onText(/\/greet (.+)/, (msg, input) => {
 });
 
 bot.onText(/\/lorem/||/\/lorem (.*)/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var loremSettings = {
 	url: 'http://lorempixel.com/400/200',
 	encoding: null
@@ -27,6 +44,7 @@ bot.onText(/\/lorem/||/\/lorem (.*)/, (msg) =>{
 });
 
 bot.onText(/\/doit/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var doit = [
 	'http://i.imgur.com/RPbK0fZ.png',
 	'http://i.imgur.com/TgUQfNI.jpg',
@@ -37,6 +55,7 @@ bot.onText(/\/doit/,(msg) =>{
 });
 
 bot.onText(/\/ship/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var ship = [
 	'http://i.imgur.com/b7bzy0C.png',
 	'http://i.imgur.com/hse69ui.jpg',
@@ -74,6 +93,7 @@ bot.onText(/\/ship/,(msg) =>{
 });
 
 bot.onText(/\/draw/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var editions = [
 	{short:'an', count:92},
 	{short:'lg', count:310},
@@ -115,11 +135,13 @@ bot.onText(/\/draw/, (msg) =>{
 });
 //does this function have to exist ... (CptPie)
 bot.onText(/\/💩/,(msg) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, 'Kothaufen');
 });
 
 bot.onText(/\/merge/,(msg) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	var merge = [
 	'https://i.imgur.com/X9zNSkM.gif',
 	'https://cdn.meme.am/cache/instances/folder86/500x/64007086/disaster-girl-push-rejected-rebase-or-merge-git-push-force.jpg',
@@ -144,6 +166,7 @@ var downloader = function(uri, filename, callback){
 };
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
 	var loc = input[1];
 	downloader('http://wttr.in/'+loc+'.png?1', 'wetter.png',function(){
@@ -156,33 +179,39 @@ function sendingWeather(chatId,loc, photo){
 };
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatID = msg.chat.id;
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
 	bot.sendMessage(chatID, input[1] + " " + answer);
 });
 
 bot.onText(/\/burn/, (msg) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 });
 
 bot.onText(/\/slap (.+)/, (msg,input) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>",{parse_mode : "HTML"});
 });
 
 
 bot.onText(/\/hype/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id, msg.from.first_name+' started a HYPE-Train!');
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
 });
 
 bot.onText(/\/choose (.+), (.+)/,(msg, input) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	var answer = Math.random() >= 0.5 ? input[1] : input[2];
 	bot.sendMessage(msg.chat.id, "@shipitbot has chosen *"+answer+"* for "+msg.from.first_name,{parse_mode : "Markdown"});
 });
 
 bot.onText(/\/scissors/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	let sign = contents.sign[Math.floor(Math.random()*Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, it\'s a draw between ShipIt-Bot and '+msg.from.first_name);
@@ -194,6 +223,7 @@ bot.onText(/\/scissors/, (msg) =>{
 });
 
 bot.onText(/\/rock/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	let sign = contents.sign[Math.floor(Math.random()*Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, '+msg.from.first_name+' has won');
@@ -205,6 +235,7 @@ bot.onText(/\/rock/, (msg) =>{
 });
 
 bot.onText(/\/paper/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	let sign = contents.sign[Math.floor(Math.random()*Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, '+msg.from.first_name+' has lost');
@@ -215,23 +246,8 @@ bot.onText(/\/paper/, (msg) =>{
 	}
 });
 
-bot.onText(/\/register/, (msg) => {
-	var username = msg.from.username;
-	var firstname =msg.from.first_name;
-	var myObject=require('./users');	
-	for (i in myObject.users){
-		if (myObject.users[i].username==username){
-			var contains = true;
-		};
-	};
-	if (!contains){
-		myObject['users'].push({'username': username,'first': firstname});
-	};
-	var json = JSON.stringify(myObject);
-	fs.writeFile('users.json',json);
-});
-
 bot.onText(/\/who (.+)/, (msg, input) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var users=require('./users')
 	username = users.users[Math.floor(Math.random()*Object.keys(users.users).length)].first;
 	bot.sendMessage(msg.chat.id, ''+username+' '+input[1]);
