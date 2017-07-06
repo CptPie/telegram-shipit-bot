@@ -155,7 +155,7 @@ bot.onText(/\/merge/,(msg) => {
 
 var j = schedule.scheduleJob('30 5 * * *', function(){
 	downloader('http://wttr.in/'+config.dailyLocation+'.png?1', 'dailywetter.png',function(){
-		sendingWeather(config.dailyChatId,dailyLocation,__dirname+'/dailywetter.png');
+		sendingWeather(config.dailyChatId, config.dailyLocation, __dirname+'/dailywetter.png');
 	});
 });
 
