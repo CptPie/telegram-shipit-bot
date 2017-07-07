@@ -1,0 +1,24 @@
+{
+  "name": "telegram-shipit-bot",
+  "version": "0.0.1",
+  "description": "ship it!",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CptPie/telegram-shipit-bot.git"
+  },
+  "author": "CptPie",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/CptPie/telegram-shipit-bot/issues"
+  },
+  "homepage": "https://github.com/CptPie/telegram-shipit-bot#readme",
+  "dependencies": {
+    "node-schedule": "^1.2.3",
+    "node-telegram-bot-api": "^0.27.1",
+    "request": "^2.81.0"
+  }
+}
