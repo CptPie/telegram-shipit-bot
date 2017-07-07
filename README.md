@@ -1,9 +1,9 @@
 # Telegram Ship-it Bot
-Simple telegram bot with basic Message and picture sending capabilities.
-The bot also sends daily at 6:00 am the weather forecast for the provided location (see var daily-loc) at the provided chat id (see var ChatId).
+Simple telegram bot with basic Message and picture sending capabilities.\
+The bot also sends daily at 5:30 am the weather forecast for the provided location (see config.json).
 
 # Users
-Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
+Use these commands to get a response from the bot.
 * /burn - burn the witch!
 * /choose [option1], [option2] - chooses one of the options
 * /decide \<question> - answers a yes/no question
@@ -13,13 +13,12 @@ Simply write /shipit or /doit to @shipitbot and enjoy your pictures.
 * /lorem - sends a random picture from lorempixel.com
 * /merge - sends a random merge meme picture
 * /paper - plays rock/paper/scissors with the bot
-* /register - registers a user for usage in the /who method
 * /rock - plays rock/paper/scissors with the bot
 * /scissors - plays rock/paper/scissors with the bot
 * /shipit - sends a random picture related to the phrase "ship it"
 * /slap [name] - slaps [name] around a bit with a large trout
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
-* /who [text] - returns a random name from registered users (see /register) and the provided text e.g. 'CptPie [text]'
+* /who [text] - returns a random name from registered users and the provided text e.g. 'CptPie [text]'
 
 # For Server-Maintainer
 There is a shell script called "automated_deploy.sh".\
