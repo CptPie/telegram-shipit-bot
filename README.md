@@ -12,6 +12,7 @@ Use these commands to get a response from the bot.
 * /greet [name] - greets the given name "Hello, [name]" 
 * /lorem - sends a random picture from lorempixel.com
 * /merge - sends a random merge meme picture
+* /motivation - post a randomly generated motivational image
 * /paper - plays rock/paper/scissors with the bot
 * /rock - plays rock/paper/scissors with the bot
 * /scissors - plays rock/paper/scissors with the bot
