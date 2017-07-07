@@ -204,9 +204,11 @@ bot.onText(/\/hype/, (msg) =>{
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');	
 });
 
-bot.onText(/\/choose (.+), (.+)/,(msg, input) => {
+bot.onText(/\/choose (.+)/,(msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
-	var answer = Math.random() >= 0.5 ? input[1] : input[2];
+	var str = input[1];
+	var res = str.split(", ");
+	var answer = res[Math.floor(Math.random()*res.length)];
 	bot.sendMessage(msg.chat.id, "@shipitbot has chosen *"+answer+"* for "+msg.from.first_name,{parse_mode : "Markdown"});
 });
 
