@@ -176,3 +176,15 @@ bot.onText(/\/who (.+)/, (msg, input) =>{
 	username = users.users[Math.floor(Math.random()*Object.keys(users.users).length)].first;
 	bot.sendMessage(msg.chat.id, ''+username+' '+input[1]);
 });
+
+bot.onText(/\/motivation/, (msg, input) =>{
+	request.get("http://inspirobot.me/api?generate=true", (error, response, body)=>{
+		if(error){
+			console.log(`error getting inspiration ${error}`);
+			return
+		}
+		downloader(body, 'inspiration.jpg', ()=>{
+			bot.sendPhoto(msg.chat.id, `${__dirname}/inspiration.jpg`, {caption: `get motivated ${msg.from.first_name}! ${body}`});
+		})
+	})
+});
