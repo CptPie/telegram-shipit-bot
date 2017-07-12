@@ -8,7 +8,8 @@ Use these commands to get a response from the bot.
 * /choose [option1], [option2] - chooses one of the options
 * /decide \<question> - answers a yes/no question
 * /doit - sends a random picture related to the phrase "do it"
-* /draw - gets a random card from the early years of magic the gathering, cudos an magiccards.info
+* /drawArt - gets a random art from the early years of magic the gathering, cudos to magiccards.info
+* /drawCard - gets a random card from the early years of magic the gathering, cudos to magiccards.info
 * /greet [name] - greets the given name "Hello, [name]" 
 * /lorem - sends a random picture from lorempixel.com
 * /merge - sends a random merge meme picture

@@ -55,14 +55,23 @@ bot.onText(/\/ship/,(msg) =>{
 	bot.sendMessage(chatId, contents.ship[Math.floor(Math.random()*contents.ship.length)].link);
 });
 
-bot.onText(/\/draw/, (msg) =>{
+bot.onText(/\/drawCard/, (msg) =>{
 	saveUser(msg.from.username, msg.from.first_name);
 	
 	const chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random()*contents.editions.length)];
-	bot.sendMessage(chatId,`http://magiccards.info/scans/en/${edition.short}/${Math.floor(Math.random()*edition.count)}.jpg`);
+	bot.sendMessage(chatId,`http://magiccards.info/scans/en/${edition.short}/${Math.floor(Math.random()*edition.count)+1}.jpg`);
+});
+
+bot.onText(/\/drawArt/, (msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
+	
+	const chatId = msg.chat.id;
+	let edition = contents.editions[Math.floor(Math.random()*contents.editions.length)];
+	bot.sendMessage(chatId,`http://magiccards.info/crop/en/${edition.short}/${Math.floor(Math.random()*edition.count)}.jpg`);
 });
 //does this function have to exist ... (CptPie)
+//quote xAndy: "ja"
 bot.onText(/\/💩/,(msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
