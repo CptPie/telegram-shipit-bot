@@ -20,6 +20,8 @@ Use these commands to get a response from the bot.
 * /slap [name] - slaps [name] around a bit with a large trout
 * /weather [location] - sends a picture with the current weather forecast of the provided location (from wttr.in)
 * /who [text] - returns a random name from registered users and the provided text e.g. 'CptPie [text]'
+* /space - returns true if the space is open or closed
+
 
 # For Server-Maintainer
 There is a shell script called "automated_deploy.sh".\
