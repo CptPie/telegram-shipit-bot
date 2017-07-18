@@ -206,11 +206,14 @@ bot.onText(/\/space/, (msg) => {
 	xmlHttp.send(null);
 	json = JSON.parse(xmlHttp.responseText);
 	var isSpaceOpenString = (json.open) ? "offen" : "geschlossen";
-	var personInSpace = json.sensors.people_now_present[0].names;
-	var pIS = "";
-	personInSpace.forEach(function (person) { pIS += person + " " });
-	var pISOutput = (json.open) ? (personInSpace.length == 1) ? "\nIm Space befindet sich " + pIS : "\nIm space befinden sich " + pIS : "";
+	var pISOutput = "";
+	if (json.open) {
+		var pIS = "";
+		var personInSpace = json.sensors.people_now_present[0].names
+		personInSpace.forEach(function (person) { pIS += person + " " });
+		pISOutput = (personInSpace.length == 1) ? "\nIm Space befindet sich " + pIS : "\nIm Space befinden sich " + pIS;
+		isSpaceOpenString += pISOutput;
+	}
 	var spacePic = (json.open) ? json.state.icon.open : json.state.icon.closed;
-	bot.sendPhoto(msg.chat.id, spacePic, { caption: "Der Space ist " + isSpaceOpenString + pISOutput });
+	bot.sendPhoto(msg.chat.id, spacePic, { caption: "Der Space ist " + isSpaceOpenString });
 }); 
-
