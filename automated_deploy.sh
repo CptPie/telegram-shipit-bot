@@ -24,7 +24,7 @@ while [ 1 ]; do
                 echo ">> Killing current 'node bot.js' and './make.sh' process"
                 echo "..."
                 pkill -f "npm"
-                pkill -f "node ./server.js"
+                pkill -f "node server.js"
                 echo ">> Process killed"
 
                 echo ""
