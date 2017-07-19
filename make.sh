@@ -22,12 +22,7 @@ fi
 # Therefore, every dependency has be listed in the array "dependencies", seperated by a whitespace
 function downloadDependencies {
 	echo "Downloading dependencies"
-
-	local dependencies=(node-telegram-bot-api request node-schedule)
-
-	for dependency in "${dependencies[@]}"; do
-		npm install $dependency
-	done
+	npm install
 }
 
 ################
@@ -40,7 +35,7 @@ function downloadDependencies {
 # if argument -a is given, the dependencies will be installed and the bot will be started
 if [ $# == 0 ]; then
 	echo "Starting Telegram Bot"
-	node ./bot.js
+	npm start
 elif [ $1 == -d ]; then
 	downloadDependencies
 elif [ $1 == -a ]; then

@@ -3,8 +3,9 @@ const request = require('request');
 const schedule = require('node-schedule');
 const fs = require('fs');
 const config = require('./config');
-const bot = new TelegramBot(config.bottoken, {polling: true})
-const contents = require('./contents')
+const bot = new TelegramBot(config.bottoken, {polling: true});
+const contents = require('./contents');
+const catFacts = require('cat-facts');
 
 function saveUser(username, firstname){
 	var myObject=require('./users');	
@@ -187,4 +188,10 @@ bot.onText(/\/motivation/, (msg, input) =>{
 			bot.sendPhoto(msg.chat.id, `${__dirname}/inspiration.jpg`, {caption: `get motivated ${msg.from.first_name}! ${body}`});
 		})
 	})
+});
+
+bot.onText(/\/(fact|cat)/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
+	const chatId = msg.chat.id;
+	bot.sendMessage(chatId, catFacts.random());
 });

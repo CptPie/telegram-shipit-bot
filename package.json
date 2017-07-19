@@ -4,7 +4,7 @@
   "description": "ship it!",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CptPie/telegram-shipit-bot#readme",
   "dependencies": {
+    "cat-facts": "^1.0.2",
     "node-schedule": "^1.2.3",
     "node-telegram-bot-api": "^0.27.1",
     "request": "^2.81.0"
