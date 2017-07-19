@@ -5,14 +5,17 @@ The bot also sends daily at 5:30 am the weather forecast for the provided locati
 # Users
 Use these commands to get a response from the bot.
 * /burn - burn the witch!
+* /cat - cat facts!
 * /choose [option1], [option2] - chooses one of the options
 * /decide \<question> - answers a yes/no question
 * /doit - sends a random picture related to the phrase "do it"
 * /drawArt - gets a random art from the early years of magic the gathering, cudos to magiccards.info
 * /drawCard - gets a random card from the early years of magic the gathering, cudos to magiccards.info
+* /fact - cat facts!
 * /greet [name] - greets the given name "Hello, [name]" 
 * /lorem - sends a random picture from lorempixel.com
 * /merge - sends a random merge meme picture
+* /motivation - post a randomly generated motivational image
 * /paper - plays rock/paper/scissors with the bot
 * /rock - plays rock/paper/scissors with the bot
 * /scissors - plays rock/paper/scissors with the bot

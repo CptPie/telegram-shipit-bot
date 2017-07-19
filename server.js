@@ -5,8 +5,8 @@ const fs = require('fs');
 const config = require('./config');
 const bot = new TelegramBot(config.bottoken, { polling: true })
 const contents = require('./contents')
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const catFacts = require('cat-facts');
 
 function saveUser(username, firstname) {
 	var myObject = require('./users');
@@ -217,3 +217,9 @@ bot.onText(/\/space/, (msg) => {
 	var spacePic = (json.open) ? json.state.icon.open : json.state.icon.closed;
 	bot.sendPhoto(msg.chat.id, spacePic, { caption: "Der Space ist " + isSpaceOpenString });
 }); 
+
+bot.onText(/\/(fact|cat)/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
+	const chatId = msg.chat.id;
+	bot.sendMessage(chatId, catFacts.random());
+});
