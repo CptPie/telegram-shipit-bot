@@ -2,9 +2,9 @@
   "name": "telegram-shipit-bot",
   "version": "0.0.1",
   "description": "ship it!",
-  "main": "bot.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "cat-facts": "^1.0.2",
     "node-schedule": "^1.2.3",
     "node-telegram-bot-api": "^0.27.1",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
