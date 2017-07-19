@@ -30,19 +30,8 @@ If no update is available, your bot just works as expected.\
 \
 There is no need to use the ./make.sh.
 
-# Build-Script (for developer)
-## Usage
-The bash script "make.sh" is managing the dependencies and starts the bot.
-Following arguments shall be used:
-- ./make.sh -> Starts the bot and does not check for dependencies
-- ./make.sh -d -> Downloads all dependencies
-- ./make.sh -a -> Downloads all dependencies and starts the bot
-
-## Adding a dependency
-If you want to add a dependency, simple add the name of the dependency to the array "dependencies" in the function "downloadDependencies"\
-Example: `local dependencies=(node-telegram-bot-api request node-schedule)` downloads following dependencies
-- node-telegram-bot-api
-- request
-- node-scheduler
-
-All dependencies are seperated by a whitespace character
+# Building the bot
+The build process is done via npm.\
+\
+Please read the following documentation to get familiar with npm: \
+https://docs.npmjs.com/
