@@ -237,3 +237,9 @@ bot.onText(/\/(fact|cat)/,(msg) =>{
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, catFacts.random());
 });
+
+bot.onText(/\/source/,(msg)=>{
+	saveUser(msg.from.username, msg.from.first_name);
+	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
+});
+
