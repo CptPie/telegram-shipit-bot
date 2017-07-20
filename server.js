@@ -203,14 +203,14 @@ bot.onText(/\/motivation/, (msg, input) => {
 bot.onText(/\/space/, (msg) => {
 	var msgid;
 	var timerid;
-	var waitmsg = "fetching space status...";
+	var waitmsg = "fetching space status: ";
 	bot.sendMessage(msg.chat.id, waitmsg).
 	then((msginfo)=>{
 		msgid = msginfo.message_id;
 		timerid = setInterval(()=>{
-			waitmsg+=".";
+			waitmsg+="* ";
 			bot.editMessageText(waitmsg, {message_id: msgid, chat_id: msg.chat.id});
-		}, 1000);
+		}, 2500);
 	}).then(()=>{
 		request.get("http://status.bckspc.de/spacestatus.php", (error, response, body) => {
 			clearInterval(timerid);
