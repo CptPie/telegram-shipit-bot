@@ -5,7 +5,6 @@ const fs = require('fs');
 const config = require('./config');
 const bot = new TelegramBot(config.bottoken, { polling: true })
 const contents = require('./contents')
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const catFacts = require('cat-facts');
 
 function saveUser(username, firstname) {
@@ -200,23 +199,38 @@ bot.onText(/\/motivation/, (msg, input) => {
 	})
 });
 
+
 bot.onText(/\/space/, (msg) => {
-	xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", "http://status.bckspc.de/spacestatus.php", false);
-	xmlHttp.send(null);
-	json = JSON.parse(xmlHttp.responseText);
-	var isSpaceOpenString = (json.open) ? "offen" : "geschlossen";
-	var pISOutput = "";
-	if (json.open) {
-		var pIS = "";
-		var personInSpace = json.sensors.people_now_present[0].names
-		personInSpace.forEach(function (person) { pIS += person + " " });
-		pISOutput = (personInSpace.length == 1) ? "\nIm Space befindet sich " + pIS : "\nIm Space befinden sich " + pIS;
-		isSpaceOpenString += pISOutput;
-	}
-	var spacePic = (json.open) ? json.state.icon.open : json.state.icon.closed;
-	bot.sendPhoto(msg.chat.id, spacePic, { caption: "Der Space ist " + isSpaceOpenString });
-}); 
+	var msgid;
+	var timerid;
+	var waitmsg = "fetching space status...";
+	bot.sendMessage(msg.chat.id, waitmsg).
+	then((msginfo)=>{
+		msgid = msginfo.message_id;
+		timerid = setInterval(()=>{
+			waitmsg+=".";
+			bot.editMessageText(waitmsg, {message_id: msgid, chat_id: msg.chat.id});
+		}, 1000);
+	}).then(()=>{
+		request.get("http://status.bckspc.de/spacestatus.php", (error, response, body) => {
+			clearInterval(timerid);
+			let status = JSON.parse(body);
+			var msgtext = "Der space ist geschlossen";
+			var icon = status.state.icon.closed;
+			if(status.open){
+				icon = status.state.icon.open;
+				msgtext = "Der space ist offen."
+				if(status.sensors.people_now_present[0].value==1){
+					msgtext += `\n${status.sensors.people_now_present[0].names[0]} ist im Space`
+				}else{
+					msgtext += `\n${status.sensors.people_now_present[0].names.join(', ')} sind im Space`
+				}
+			}
+			msgtext += `[.](${icon})`;
+			bot.editMessageText(msgtext, {message_id: msgid, chat_id: msg.chat.id, parse_mode: 'markdown'});
+		})
+	});
+});
 
 bot.onText(/\/(fact|cat)/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name);
