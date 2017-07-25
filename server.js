@@ -243,3 +243,26 @@ bot.onText(/\/source/,(msg)=>{
 	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
 });
 
+
+
+
+
+bot.onText(/\/test/,(msg) =>{
+	var math2png = require("./math2png").math2png;
+	var options = {
+	  config: {
+	  },
+	  typeset: {
+	    math: "x^2+4x+3",
+	    format: "TeX"
+	  }
+	}
+	math2png(options, function(result){
+		console.log(result.png);
+	    var data = str(result).replace(/^data:image\/\w+;base64,/, '');
+		console.log(data);
+		fs.writeFile("out.png", data, 'base64', function(err) {
+		  console.log(err);
+		});
+	});
+});
