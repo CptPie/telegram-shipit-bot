@@ -73,6 +73,7 @@ bot.onText(/\/drawArt/, (msg) => {
 });
 //does this function have to exist ... (CptPie)
 //quote xAndy: "ja"
+//ach mann (CptPie)
 bot.onText(/\/💩/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
@@ -243,26 +244,37 @@ bot.onText(/\/source/,(msg)=>{
 	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
 });
 
+//its awful but it finally works! - fml
 
-
-
-
-bot.onText(/\/test/,(msg) =>{
-	var math2png = require("./math2png").math2png;
-	var options = {
-	  config: {
-	  },
-	  typeset: {
-	    math: "x^2+4x+3",
-	    format: "TeX"
-	  }
-	}
-	math2png(options, function(result){
-		console.log(result.png);
-	    var data = str(result).replace(/^data:image\/\w+;base64,/, '');
-		console.log(data);
-		fs.writeFile("out.png", data, 'base64', function(err) {
-		  console.log(err);
-		});
+bot.onText(/\/math (.+)/,(msg, input) =>{
+	var mathrenderer = function (input,callback) {
+	var mjAPI = require("mathjax-node-svg2png");
+	mjAPI.config({
+	  MathJax: {}
 	});
+	mjAPI.start();
+		var yourMath = input;
+		console.log("hi");
+		mjAPI.typeset({
+		  math: yourMath,
+		  format: "TeX",
+		  scale: 2,
+		  png:true
+		}, function (data) {
+		  if (!data.errors) {
+			base64Data = data.png.replace(/^data:image\/png;base64,/,""),
+		  	binaryData = new Buffer(base64Data, 'base64').toString('binary');
+			require("fs").writeFile("out.png", binaryData, "binary", function (err){
+				console.log("Error: "+err);
+				callback();
+			});
+		  }
+		});
+	};
+	mathrenderer(input[1],sendit);
+	var chatId = msg.chat.id;
+	function sendit(){
+		console.log("in function "+chatId);
+		bot.sendPhoto(msg.chat.id,__dirname+"/out.png");
+	}
 });
