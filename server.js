@@ -254,7 +254,6 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
 	});
 	mjAPI.start();
 		var yourMath = input;
-		console.log("hi");
 		mjAPI.typeset({
 		  math: yourMath,
 		  format: "TeX",
@@ -274,7 +273,6 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
 	mathrenderer(input[1],sendit);
 	var chatId = msg.chat.id;
 	function sendit(){
-		console.log("in function "+chatId);
 		bot.sendPhoto(msg.chat.id,__dirname+"/out.png");
 	}
 });
