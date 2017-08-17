@@ -1,5 +1,5 @@
 # Telegram Ship-it Bot
-Simple telegram bot with basic Message and picture sending capabilities.\
+Simple telegram bot with basic messaging and picture sending capabilities.\
 The bot also sends daily at 5:30 am the weather forecast for the provided location (see config.json).
 
 # Users
