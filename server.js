@@ -3,8 +3,8 @@ const request = require('request');
 const schedule = require('node-schedule');
 const fs = require('fs');
 const config = require('./config');
-const bot = new TelegramBot(config.bottoken, { polling: true })
-const contents = require('./contents')
+const bot = new TelegramBot(config.bottoken, { polling: true });
+const contents = require('./contents');
 const catFacts = require('cat-facts');
 
 function saveUser(username, firstname) {
@@ -282,3 +282,27 @@ bot.onText(/\/help/,(msg) =>{
 bot.onText(/Apple/,(msg) =>{
 	bot.sendMessage(msg.chat.id, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 })
+
+schedule.scheduleJob('00 * * * *', function () {	
+	downloader("http://dwd.de/DWD/warnungen/warnapp/json/warnings.json","warnings.json", function(){
+		var obj;
+		fs.readFile('./warnings.json','utf8',function (err,data) {
+			if (err){
+				return console.log(err)
+			};
+			dataClean=data.substring(24,data.length-2);
+			obj = JSON.parse(dataClean);
+			if (obj.warnings[109471000]!=undefined){
+				bot.sendMessage(config.dailyChatId,"*"+obj.warnings[109471000][0].headline+"*"+" fuer "+obj.warnings[109471000][0].regionName,{parse_mode: "Markdown"});
+				
+				//its not nice but assures that the description is send after the overview
+			
+				function function1 (){
+					bot.sendMessage(config.dailyChatId,obj.warnings[109471000][0].description)
+				};
+				setTimeout(function1, 500);
+			};
+		});
+	});
+});
+
