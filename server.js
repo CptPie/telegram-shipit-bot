@@ -233,7 +233,13 @@ bot.onText(/\/space/, (msg) => {
 bot.onText(/\/(fact|cat)/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
-	bot.sendMessage(chatId, catFacts.random());
+	downloader("https://random.cat/meow","cat.json", function(){
+		var obj;
+		fs.readFile('./cat.json','utf8',function (err,data) {
+			obj = JSON.parse(data);
+			bot.sendPhoto(chatId,obj.file,{caption: catFacts.random()})
+		})
+	})		
 });
 
 bot.onText(/\/source/,(msg)=>{
@@ -244,6 +250,7 @@ bot.onText(/\/source/,(msg)=>{
 //its awful but it finally works! - fml
 
 bot.onText(/\/math (.+)/,(msg, input) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	var mathrenderer = function (input,callback) {
 	var mjAPI = require("mathjax-node-svg2png");
 	mjAPI.config({
@@ -275,11 +282,13 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
 });
 
 bot.onText(/\/help/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id,
 		"Hi there, I am a simple telegram bot named shipitbot. I can understand the following commands:\n* \/burn - I will burn the witch!\n* \/cat - I will send a random cat fact\n* \/choose [option 1],..., [option n] - I will help you to choose between any amount of options\n* \/decide [question] - I will decide for you (returns yes or no)\n* \/doit - I will send a random picture related to the meme 'Just do it!'\n* \/drawArt - I will send a random art from the early years of magic the gathering, cudos to magiccards.info\n* \/drawCard - I will send a random card from the early years of magic the gathering, cudos to magiccards.info\n* \/fact - I will send a random cat fact\n* \/greet [name] - I will greet the provided name!\n* \/help - I will display this message\n* \/hype - I will start the hype train for you\n* \/lorem - I will send a random picture provided by lorempixel.com\n* \/math [formula] - I will send you a nicely rendered picture of your formula (I can even understand LaTeX commands, provided they are from the amsmath package)\n* \/merge - I will send a random picture related to the word 'merge'\n* \/motivation - I will send a randomly generated motivational image\n* \/paper - I will play rock paper scissors with you\n* \/rock - I will play rock paper scissors with you\n* \/scissors - I will play rock paper scissors with you\n* \/shipit - I will send a image related to the phrase 'ship it'\n* \/slap [name] - I will slap the provided person a bit with large trout\n* \/source - I will link you to the GitHub repository which contains my source files\n* \/space - I will send you the current status of the hackerspace in Bamberg, Germany\n* \/weather [location] - I will send you the weather forecast for today for the provided location (from wttr.in)\n* \/who [message] - (should be used in a group) I will select a random user of a group and display the users name with the provided message\n");
 });
 
 bot.onText(/Apple/,(msg) =>{
+	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 })
 
