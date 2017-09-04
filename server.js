@@ -7,6 +7,13 @@ const bot = new TelegramBot(config.bottoken, { polling: true });
 const contents = require('./contents');
 const catFacts = require('cat-facts');
 
+/**
+ * @param  {string} username - the username to be saved
+ * @param  {string} firstname - the firstname to be saved		
+ * This function saves the user data as json object in the user.json file.
+ * This function does check for duplicates and ignores it`s call if the user is already present in the json.
+ */
+
 function saveUser(username, firstname) {
 	var myObject = require('./users');
 	for (i in myObject.users) {
@@ -21,6 +28,12 @@ function saveUser(username, firstname) {
 	fs.writeFile('users.json', json);
 };
 
+/**
+ * This function only triggers if the regex \/\greet (.+)/ is met. (.+) stands for the provided input by the user.
+ * The function sends a message in the format: 'Hello [input]'.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/greet (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
@@ -28,6 +41,12 @@ bot.onText(/\/greet (.+)/, (msg, input) => {
 	var resp = 'Hello, ' + blub;
 	bot.sendMessage(chatId, resp);
 });
+
+/**
+ * This function sends a random picture provided by lorempixel.com.
+ * The funciton only triggers if the regex \/\lorem/ or \/\lorem (.+)/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -43,41 +62,75 @@ bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
 	})
 });
 
+/**
+ * This function sends a random picture/gif provided by the array 'doit' in the contents.json.
+ * The function only triggers if the regex /\/doit/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/doit/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
-	const chatId = msg.chat.id;
+	let chatId = msg.chat.id;
 	bot.sendPhoto(chatId, contents.doit[Math.floor(Math.random() * contents.doit.length)].link);
 });
 
+/**
+ * This function sends a random picture/gif provided by the array 'ship' in the contents.json.
+ * The function only triggers if the regex /\/ship/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/ship/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
-	const chatId = msg.chat.id;
+	let chatId = msg.chat.id;
 	bot.sendMessage(chatId, contents.ship[Math.floor(Math.random() * contents.ship.length)].link);
 });
 
+/**
+ * This funciton sends a random card from a random edition provided by the array 'editions' in the contents.json.
+ * Cards provided by http://magiccards.info.
+ * The function only triggers if the regex /\/drawCard/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/drawCard/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
-
-	const chatId = msg.chat.id;
+	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
 	bot.sendMessage(chatId, `http://magiccards.info/scans/en/${edition.short}/${Math.floor(Math.random() * edition.count) + 1}.jpg`);
 });
 
+/**
+ * This function sends a random cardart from a random edition provides by the array 'editions' in the contents.json.
+ * Cardarts provided by http://magiccards.info.
+ * The function only triggers if the regex \/\drawArt/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/drawArt/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
-
-	const chatId = msg.chat.id;
+	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
 	bot.sendMessage(chatId, `http://magiccards.info/crop/en/${edition.short}/${Math.floor(Math.random() * edition.count)}.jpg`);
 });
-//does this function have to exist ... (CptPie)
-//quote xAndy: "ja"
-//ach mann (CptPie)
+
+/**
+ * Apparantly this has to exist :/
+ * This funciton sends the message 'Kothaufen', if you use the command /[hankeyemoji] is used.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/💩/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, 'Kothaufen');
 });
+
+/**
+ * This function sends a random picture/gif provided by the array 'merge' in the contents.json.
+ * The function only triggers if the regex /\/merge/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/merge/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -85,17 +138,37 @@ bot.onText(/\/merge/, (msg) => {
 	bot.sendMessage(chatId, contents.merge[Math.floor(Math.random() * contents.merge.length)].link);
 });
 
-var j = schedule.scheduleJob('30 5 * * *', function () {
+/**
+ * @param  {string} config.dailyLocation - The location for which the weather forcast should be sent
+ * This function sends the weather forecast for the provided location
+ * Weather forecast by http://wttr.in.
+ * The function triggers daily at 5:30 am (server-/hosttime).
+ */
+
+schedule.scheduleJob('30 5 * * *', function () {
 	downloader('http://wttr.in/' + config.dailyLocation + '.png?1', 'dailywetter.png', function () {
 		sendingWeather(config.dailyChatId, config.dailyLocation, __dirname + '/dailywetter.png');
 	});
 });
+
+/**
+ * @param  {uri} uri - The URL from which should be downloaded
+ * @param  {string} filename - The filename as which the downloaded file should be saved (includes file extension)
+ * This function is a simple downloader for files.
+ */
 
 var downloader = function (uri, filename, callback) {
 	request.head(uri, function (err, res, body) {
 		request(uri).pipe(fs.createWriteStream(filename)).on('finish', callback);
 	});
 };
+
+/**
+ * This function sends the weather forecast for the provided location.
+ * Weather forecast by http://wttr.in.
+ * The function triggers if the regex /\/weather (.+)/ is met, (.+) is the input which contains the location for the forecast.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -106,9 +179,22 @@ bot.onText(/\/weather (.+)/, (msg, input) => {
 	});
 });
 
+/**
+ * @param  {int} chatId - The chat id to which the photo should be send.
+ * @param  {string} loc - The location of the forecast.
+ * @param  {uri} photo - The filepath to the photo which should be send.
+ * This function sends the provided photo with the caption 'Todays weather forecast for: [loc]' to the provided chatId.
+ */
+
 function sendingWeather(chatId, loc, photo) {
 	bot.sendPhoto(chatId, photo, { caption: "Todays weather forecast for: " + loc });
 };
+
+/**
+ * This function answers to the input with 'yes' or 'no'
+ * The function triggers if the regex \/\decide (.+)/ is met, (.+) is the input to which the bot answers.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -117,11 +203,23 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
 	bot.sendMessage(chatID, input[1] + " " + answer);
 });
 
+/**
+ * This function send a gif.
+ * The function triggers if the regex \/\burn/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/burn/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 });
+
+/**
+ * This function sends a message.
+ * The function triggers if the regex \/\slap (.+)/ is met, (.+) is the input which is used in the message.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/slap (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -129,11 +227,23 @@ bot.onText(/\/slap (.+)/, (msg, input) => {
 	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>", { parse_mode: "HTML" });
 });
 
+/**
+ * This functions sends a photo.
+ * The function triggers if the regex \/\hype/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/hype/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id, msg.from.first_name + ' started a HYPE-Train!');
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');
 });
+
+/**
+ * This function takes one input, splits it on the comma, and sends one random element of the split input.
+ * The function triggers if the regex \/\choose (.+)/ is met, (.+) is the input which is split.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/choose (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
