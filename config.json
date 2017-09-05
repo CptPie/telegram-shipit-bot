@@ -1,5 +1,6 @@
 {
 	"bottoken": "YOUR TOKEN",
 	"dailyChatId": "YOUR DESIRED CHATID",
-	"dailyLocation": "YOUR DESIRED LOCATION"
+	"dailyLocation": "YOUR DESIRED LOCATION",
+	"warningCode": "109471000"
 }
