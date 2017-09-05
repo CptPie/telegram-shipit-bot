@@ -424,13 +424,3 @@ schedule.scheduleJob('00 * * * *', function () {
 		});
 	});
 });
-
-bot.onText(/\/test/,(msg) =>{
-	var string = 'foobar is ein tolles wort'
-	if(string.search(/ist/i)!=-1){
-		console.log('jo is drin');
-	} else {
-		console.log('is ned drin');
-	}
-})
-
