@@ -412,16 +412,25 @@ schedule.scheduleJob('00 * * * *', function () {
 			dataClean=data.substring(24,data.length-2);
 			obj = JSON.parse(dataClean);
 			if (obj.warnings[109471000]!=undefined){
-				bot.sendMessage(config.dailyChatId,"*"+obj.warnings[109471000][0].headline+"*"+" fuer "+obj.warnings[109471000][0].regionName,{parse_mode: "Markdown"});
-				
-				//its not nice but assures that the description is send after the overview
-			
-				function function1 (){
-					bot.sendMessage(config.dailyChatId,obj.warnings[109471000][0].description)
+				if (obj.warnings[109471000][0].headline.search(/nebel/i)==-1) {
+					bot.sendMessage(config.dailyChatId,"*"+obj.warnings[109471000][0].headline+"*"+" fuer "+obj.warnings[109471000][0].regionName,{parse_mode: "Markdown"});
+					//its not nice but assures that the description is send after the overview
+					function function1 (){
+						bot.sendMessage(config.dailyChatId,obj.warnings[109471000][0].description)
+					};
+					setTimeout(function1, 500);
 				};
-				setTimeout(function1, 500);
 			};
 		});
 	});
 });
+
+bot.onText(/\/test/,(msg) =>{
+	var string = 'foobar is ein tolles wort'
+	if(string.search(/ist/i)!=-1){
+		console.log('jo is drin');
+	} else {
+		console.log('is ned drin');
+	}
+})
 
