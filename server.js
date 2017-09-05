@@ -253,6 +253,16 @@ bot.onText(/\/choose (.+)/, (msg, input) => {
 	bot.sendMessage(msg.chat.id, "@shipitbot has chosen *" + answer + "* for " + msg.from.first_name, { parse_mode: "Markdown" });
 });
 
+/**
+ * This function is one of the three required functions needed for the rock paper scissors game with the bot.
+ * The function only triggers if the regex \/\scissors/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ * 
+ * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
+ *
+ *  The function sends a message according to the result of the game.
+ */
+
 bot.onText(/\/scissors/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
@@ -264,6 +274,16 @@ bot.onText(/\/scissors/, (msg) => {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose paper, ' + msg.from.first_name + ' has won');
 	}
 });
+
+/**
+ * This function is one of the three required functions needed for the rock paper scissors game with the bot.
+ * The function only triggers if the regex \/\rock/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ * 
+ * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
+ *
+ *  The function sends a message according to the result of the game.
+ */
 
 bot.onText(/\/rock/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
@@ -277,6 +297,16 @@ bot.onText(/\/rock/, (msg) => {
 	}
 });
 
+/**
+ * This function is one of the three required functions needed for the rock paper scissors game with the bot.
+ * The function only triggers if the regex \/\paper/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ * 
+ * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
+ *
+ *  The function sends a message according to the result of the game.
+ */
+
 bot.onText(/\/paper/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
@@ -289,12 +319,26 @@ bot.onText(/\/paper/, (msg) => {
 	}
 });
 
+/**
+ * This function uses the user list in the users.json file to select a random user and append the input.
+ * The function only triggers if the regex \/\who (.+)/ is met, (.+) is the input which is later used.
+ * This function also uses the saveUser function to save any users in the users.json.
+ * @param {string} user - random user from the users array in the users.json.
+ */
+
 bot.onText(/\/who (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name);
 	var users = require('./users')
 	username = users.users[Math.floor(Math.random() * Object.keys(users.users).length)].first;
 	bot.sendMessage(msg.chat.id, '' + username + ' ' + input[1]);
 });
+
+/**
+ * This function sends a randomly generated motivational picture from http://inspirobot.me.
+ * This function also uses the saveUser function to save any users in the users.json.
+ * The function only triggers if the regex \/\motivation/ is met.
+ * This function downloads the picture using the function downloader and sends it with a caption
+ */
 
 bot.onText(/\/motivation/, (msg, input) => {
 	request.get("http://inspirobot.me/api?generate=true", (error, response, body) => {
@@ -308,7 +352,15 @@ bot.onText(/\/motivation/, (msg, input) => {
 	})
 });
 
+/**
+ * This function sends the status of the Backspace Bamberg e.V. facitlities.
+ * The function only triggers if the regex \/\space/ is met.
+ * The function sends and edites messages and finally sends a picture from the server of the Backspace e.V.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/space/, (msg) => {
+	saveUser(msg.from.username, msg.from.first_name);
 	var msgid;
 	var timerid;
 	var waitmsg = "fetching space status: ";
@@ -340,6 +392,15 @@ bot.onText(/\/space/, (msg) => {
 	});
 });
 
+/**
+ * This function sends a random cat fact and cat picture.
+ * The function only triggers if the regex \/\(fact|cat)/ is met.
+ * It downloads a randomly provided picture from https://random.cat/meow.
+ * It also uses the catFacts api to get a random catFact.
+ * The function sends the downloaded picture together with the fact from the api
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/(fact|cat)/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name);
 	const chatId = msg.chat.id;
@@ -352,12 +413,23 @@ bot.onText(/\/(fact|cat)/,(msg) =>{
 	})		
 });
 
+/**
+ * This function sends a link to the sourcefiles on github.com
+ * The function only triggers if the regex /\/source/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/source/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
 });
 
-//its awful but it finally works! - fml
+/**
+ * This function takes math expressions in the LaTeX format, renders them as svg and converts this svg to a png and sends it as photo.
+ * The function only triggers if the regex \/\math (.+)/ is met, (.+) is the input which should be converted into a png.
+ * The function uses the mathjax-node-svg2png api to render the math expression as png file.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/\/math (.+)/,(msg, input) =>{
 	saveUser(msg.from.username, msg.from.first_name);
@@ -391,32 +463,40 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
 	}
 });
 
+/**
+ * This function is a simple help command which lists all aviable commands to be used by users.
+ * The function only triggers if the regex \/\help/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/\/help/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name);
 	bot.sendMessage(msg.chat.id,
 		"Hi there, I am a simple telegram bot named shipitbot. I can understand the following commands:\n* \/burn - I will burn the witch!\n* \/cat - I will send a random cat fact\n* \/choose [option 1],..., [option n] - I will help you to choose between any amount of options\n* \/decide [question] - I will decide for you (returns yes or no)\n* \/doit - I will send a random picture related to the meme 'Just do it!'\n* \/drawArt - I will send a random art from the early years of magic the gathering, cudos to magiccards.info\n* \/drawCard - I will send a random card from the early years of magic the gathering, cudos to magiccards.info\n* \/fact - I will send a random cat fact\n* \/greet [name] - I will greet the provided name!\n* \/help - I will display this message\n* \/hype - I will start the hype train for you\n* \/lorem - I will send a random picture provided by lorempixel.com\n* \/math [formula] - I will send you a nicely rendered picture of your formula (I can even understand LaTeX commands, provided they are from the amsmath package)\n* \/merge - I will send a random picture related to the word 'merge'\n* \/motivation - I will send a randomly generated motivational image\n* \/paper - I will play rock paper scissors with you\n* \/rock - I will play rock paper scissors with you\n* \/scissors - I will play rock paper scissors with you\n* \/shipit - I will send a image related to the phrase 'ship it'\n* \/slap [name] - I will slap the provided person a bit with large trout\n* \/source - I will link you to the GitHub repository which contains my source files\n* \/space - I will send you the current status of the hackerspace in Bamberg, Germany\n* \/weather [location] - I will send you the weather forecast for today for the provided location (from wttr.in)\n* \/who [message] - (should be used in a group) I will select a random user of a group and display the users name with the provided message\n");
 });
 
-bot.onText(/Apple/,(msg) =>{
-	saveUser(msg.from.username, msg.from.first_name);
-	bot.sendMessage(msg.chat.id, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
-})
+/**
+ * This function sends weather warnings for the area code provided from the config.json.
+ * The function triggers every full hour (servertime) and downloads the current list of warnings from dwd.de.
+ * The function then cleans the downloaded file, searches for the provided area code, checks if it is not only a fog warning and then sends 2 messages containing the warning.
+ */
 
 schedule.scheduleJob('00 * * * *', function () {	
 	downloader("http://dwd.de/DWD/warnungen/warnapp/json/warnings.json","warnings.json", function(){
+		var warnArea = config.warningCode
 		var obj;
 		fs.readFile('./warnings.json','utf8',function (err,data) {
 			if (err){
 				return console.log(err)
 			};
-			dataClean=data.substring(24,data.length-2);
+			dataClean=data.substring(24,data.length-2);		//hardcoded substring is not optimal but works for now
 			obj = JSON.parse(dataClean);
-			if (obj.warnings[109471000]!=undefined){
-				if (obj.warnings[109471000][0].headline.search(/nebel/i)==-1) {
-					bot.sendMessage(config.dailyChatId,"*"+obj.warnings[109471000][0].headline+"*"+" fuer "+obj.warnings[109471000][0].regionName,{parse_mode: "Markdown"});
+			if (obj.warnings[warnArea]!=undefined){
+				if (obj.warnings[warnArea][0].headline.search(/nebel/i)==-1) {
+					bot.sendMessage(config.dailyChatId,"*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName,{parse_mode: "Markdown"});
 					//its not nice but assures that the description is send after the overview
 					function function1 (){
-						bot.sendMessage(config.dailyChatId,obj.warnings[109471000][0].description)
+						bot.sendMessage(config.dailyChatId,obj.warnings[warnArea][0].description)
 					};
 					setTimeout(function1, 500);
 				};
