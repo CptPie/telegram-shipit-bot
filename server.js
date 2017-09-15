@@ -493,10 +493,10 @@ schedule.scheduleJob('00 * * * *', function () {
 			obj = JSON.parse(dataClean);
 			if (obj.warnings[warnArea]!=undefined){
 				if (obj.warnings[warnArea][0].headline.search(/nebel/i)==-1) {
-					bot.sendMessage(config.dailyChatId,"*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName,{parse_mode: "Markdown"});
+					bot.sendMessage(config.warningChatId,"*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName,{parse_mode: "Markdown"});
 					//its not nice but assures that the description is send after the overview
 					function function1 (){
-						bot.sendMessage(config.dailyChatId,obj.warnings[warnArea][0].description)
+						bot.sendMessage(config.warningChatId,obj.warnings[warnArea][0].description)
 					};
 					setTimeout(function1, 500);
 				};
