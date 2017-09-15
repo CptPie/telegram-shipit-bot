@@ -2,5 +2,6 @@
 	"bottoken": "YOUR TOKEN",
 	"dailyChatId": "YOUR DESIRED CHATID",
 	"dailyLocation": "YOUR DESIRED LOCATION",
-	"warningCode": "YOUR WARNING AREA"
+	"warningCode": "YOUR WARNING AREA",
+	"warningChatId": "YOUR CHAT ID"
 }
