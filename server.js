@@ -481,26 +481,36 @@ bot.onText(/\/help/,(msg) =>{
  * The function then cleans the downloaded file, searches for the provided area code, checks if it is not only a fog warning and then sends 2 messages containing the warning.
  */
 
-schedule.scheduleJob('00 * * * *', function () {	
+var lastWarning="";
+
+schedule.scheduleJob('00 * * * * *', function () {	
 	downloader("http://dwd.de/DWD/warnungen/warnapp/json/warnings.json","warnings.json", function(){
 		var warnArea = config.warningCode
 		var obj;
+		var warnMessage;
 		fs.readFile('./warnings.json','utf8',function (err,data) {
 			if (err){
 				return console.log(err)
 			};
 			dataClean=data.substring(24,data.length-2);		//hardcoded substring is not optimal but works for now
 			obj = JSON.parse(dataClean);
-			if (obj.warnings[warnArea]!=undefined){
-				if (obj.warnings[warnArea][0].headline.search(/nebel/i)==-1) {
+			if (obj.warnings[warnArea]==undefined){
+				warnMessage="*"+"No more warnings for your area."+"*";
+			} else {
+				warnMessage="*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName+"\n\n"+obj.warnings[warnArea][0].description
+			};
+			if (lastWarning!=warnMessage) {
+				bot.sendMessage(config.warningChatId, warnMessage,{parse_mode: "Markdown"});
+				lastWarning=warnMessage;
+			};
+				/*if (obj.warnings[warnArea][0].headline.search(/nebel/i)==-1) {
 					bot.sendMessage(config.warningChatId,"*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName,{parse_mode: "Markdown"});
 					//its not nice but assures that the description is send after the overview
 					function function1 (){
 						bot.sendMessage(config.warningChatId,obj.warnings[warnArea][0].description)
 					};
 					setTimeout(function1, 500);
-				};
-			};
+				};*/
 		});
 	});
 });
