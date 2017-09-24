@@ -483,7 +483,7 @@ bot.onText(/\/help/,(msg) =>{
 
 var lastWarning="";
 
-schedule.scheduleJob('00 * * * * *', function () {	
+schedule.scheduleJob('*/5 * * * *', function () {	
 	downloader("http://dwd.de/DWD/warnungen/warnapp/json/warnings.json","warnings.json", function(){
 		var warnArea = config.warningCode
 		var obj;
