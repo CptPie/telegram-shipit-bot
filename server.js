@@ -499,18 +499,10 @@ schedule.scheduleJob('*/5 * * * *', function () {
 			} else {
 				warnMessage="*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName+"\n\n"+obj.warnings[warnArea][0].description
 			};
-			if (lastWarning!=warnMessage) {
+			if (lastWarning!==warnMessage) {
 				bot.sendMessage(config.warningChatId, warnMessage,{parse_mode: "Markdown"});
 				lastWarning=warnMessage;
 			};
-				/*if (obj.warnings[warnArea][0].headline.search(/nebel/i)==-1) {
-					bot.sendMessage(config.warningChatId,"*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName,{parse_mode: "Markdown"});
-					//its not nice but assures that the description is send after the overview
-					function function1 (){
-						bot.sendMessage(config.warningChatId,obj.warnings[warnArea][0].description)
-					};
-					setTimeout(function1, 500);
-				};*/
 		});
 	});
 });
