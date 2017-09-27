@@ -33,8 +33,6 @@ Hi there, I am a simple telegram bot named shipitbot. I can understand the follo
 There is a shell script called "automated_deploy.sh".\
 This script starts the bot and waits for an update in the master branch. If an update is available, the bot process will be killed, the update will be merged and the bot will be started again.\
 If no update is available, your bot just works as expected.\
-\
-There is no need to use the ./make.sh.
 
 # Building the bot
 The build process is done via npm.\
