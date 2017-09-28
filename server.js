@@ -6,25 +6,25 @@ const config = require('./config');
 const bot = new TelegramBot(config.bottoken, { polling: true });
 const contents = require('./contents');
 const catFacts = require('cat-facts');
-
+var users = require('./users')
 /**
  * @param  {string} username - the username to be saved
- * @param  {string} firstname - the firstname to be saved		
+ * @param  {string} firstname - the firstname to be saved	
+ * @param {int} UserID - the ID of the user	which should be saved
  * This function saves the user data as json object in the user.json file.
  * This function does check for duplicates and ignores it`s call if the user is already present in the json.
  */
 
-function saveUser(username, firstname) {
-	var myObject = require('./users');
-	for (i in myObject.users) {
-		if (myObject.users[i].username == username) {
+function saveUser(username, firstname, UserID) {
+	for (i in users.users) {
+		if (users.users[i].userID == UserID) {
 			var contains = true;
 		};
 	};
 	if (!contains) {
-		myObject['users'].push({ 'username': username, 'first': firstname });
+		users['users'].push({ 'username': username, 'first': firstname, 'userID': UserID, 'subscribed': false });
 	};
-	var json = JSON.stringify(myObject);
+	var json = JSON.stringify(users);
 	fs.writeFile('users.json', json);
 };
 
@@ -35,7 +35,7 @@ function saveUser(username, firstname) {
  */
 
 bot.onText(/\/greet (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	var blub = input[1];
 	var resp = 'Hello, ' + blub;
@@ -49,7 +49,7 @@ bot.onText(/\/greet (.+)/, (msg, input) => {
  */
 
 bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var loremSettings = {
 		url: 'http://lorempixel.com/400/200',
 		encoding: null
@@ -69,7 +69,7 @@ bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
  */
 
 bot.onText(/\/doit/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	bot.sendPhoto(chatId, contents.doit[Math.floor(Math.random() * contents.doit.length)].link);
 });
@@ -81,7 +81,7 @@ bot.onText(/\/doit/, (msg) => {
  */
 
 bot.onText(/\/ship/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	bot.sendMessage(chatId, contents.ship[Math.floor(Math.random() * contents.ship.length)].link);
 });
@@ -94,7 +94,7 @@ bot.onText(/\/ship/, (msg) => {
  */
 
 bot.onText(/\/drawCard/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
 	bot.sendMessage(chatId, `http://magiccards.info/scans/en/${edition.short}/${Math.floor(Math.random() * edition.count) + 1}.jpg`);
@@ -108,7 +108,7 @@ bot.onText(/\/drawCard/, (msg) => {
  */
 
 bot.onText(/\/drawArt/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
 	bot.sendMessage(chatId, `http://magiccards.info/crop/en/${edition.short}/${Math.floor(Math.random() * edition.count)}.jpg`);
@@ -121,7 +121,7 @@ bot.onText(/\/drawArt/, (msg) => {
  */
 
 bot.onText(/\/💩/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, 'Kothaufen');
 });
@@ -133,7 +133,7 @@ bot.onText(/\/💩/, (msg) => {
  */
 
 bot.onText(/\/merge/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, contents.merge[Math.floor(Math.random() * contents.merge.length)].link);
 });
@@ -171,7 +171,7 @@ var downloader = function (uri, filename, callback) {
  */
 
 bot.onText(/\/weather (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	var loc = input[1];
 	downloader('http://wttr.in/' + loc + '.png?1', 'wetter.png', function () {
@@ -197,7 +197,7 @@ function sendingWeather(chatId, loc, photo) {
  */
 
 bot.onText(/\/decide (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
 	bot.sendMessage(chatID, input[1] + " " + answer);
@@ -210,7 +210,7 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
  */
 
 bot.onText(/\/burn/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
 });
@@ -222,7 +222,7 @@ bot.onText(/\/burn/, (msg) => {
  */
 
 bot.onText(/\/slap (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>", { parse_mode: "HTML" });
 });
@@ -234,7 +234,7 @@ bot.onText(/\/slap (.+)/, (msg, input) => {
  */
 
 bot.onText(/\/hype/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id, msg.from.first_name + ' started a HYPE-Train!');
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');
 });
@@ -246,7 +246,7 @@ bot.onText(/\/hype/, (msg) => {
  */
 
 bot.onText(/\/choose (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var str = input[1];
 	var res = str.split(", ");
 	var answer = res[Math.floor(Math.random() * res.length)];
@@ -264,7 +264,7 @@ bot.onText(/\/choose (.+)/, (msg, input) => {
  */
 
 bot.onText(/\/scissors/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, it\'s a draw between ShipIt-Bot and ' + msg.from.first_name);
@@ -286,7 +286,7 @@ bot.onText(/\/scissors/, (msg) => {
  */
 
 bot.onText(/\/rock/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, ' + msg.from.first_name + ' has won');
@@ -308,7 +308,7 @@ bot.onText(/\/rock/, (msg) => {
  */
 
 bot.onText(/\/paper/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
 		bot.sendMessage(msg.chat.id, 'ShipIt-Bot chose scissors, ' + msg.from.first_name + ' has lost');
@@ -327,8 +327,7 @@ bot.onText(/\/paper/, (msg) => {
  */
 
 bot.onText(/\/who (.+)/, (msg, input) => {
-	saveUser(msg.from.username, msg.from.first_name);
-	var users = require('./users')
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	username = users.users[Math.floor(Math.random() * Object.keys(users.users).length)].first;
 	bot.sendMessage(msg.chat.id, '' + username + ' ' + input[1]);
 });
@@ -360,7 +359,7 @@ bot.onText(/\/motivation/, (msg, input) => {
  */
 
 bot.onText(/\/space/, (msg) => {
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var msgid;
 	var timerid;
 	var waitmsg = "fetching space status: ";
@@ -402,7 +401,7 @@ bot.onText(/\/space/, (msg) => {
  */
 
 bot.onText(/\/(fact|cat)/,(msg) =>{
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	downloader("https://random.cat/meow","cat.json", function(){
 		var obj;
@@ -420,7 +419,7 @@ bot.onText(/\/(fact|cat)/,(msg) =>{
  */
 
 bot.onText(/\/source/,(msg)=>{
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
 });
 
@@ -432,7 +431,7 @@ bot.onText(/\/source/,(msg)=>{
  */
 
 bot.onText(/\/math (.+)/,(msg, input) =>{
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var mathrenderer = function (input,callback) {
 	var mjAPI = require("mathjax-node-svg2png");
 	mjAPI.config({
@@ -470,7 +469,7 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
  */
 
 bot.onText(/\/help/,(msg) =>{
-	saveUser(msg.from.username, msg.from.first_name);
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id,
 		"Hi there, I am a simple telegram bot named shipitbot. I can understand the following commands:\n* \/burn - I will burn the witch!\n* \/cat - I will send a random cat fact\n* \/choose [option 1],..., [option n] - I will help you to choose between any amount of options\n* \/decide [question] - I will decide for you (returns yes or no)\n* \/doit - I will send a random picture related to the meme 'Just do it!'\n* \/drawArt - I will send a random art from the early years of magic the gathering, cudos to magiccards.info\n* \/drawCard - I will send a random card from the early years of magic the gathering, cudos to magiccards.info\n* \/fact - I will send a random cat fact\n* \/greet [name] - I will greet the provided name!\n* \/help - I will display this message\n* \/hype - I will start the hype train for you\n* \/lorem - I will send a random picture provided by lorempixel.com\n* \/math [formula] - I will send you a nicely rendered picture of your formula (I can even understand LaTeX commands, provided they are from the amsmath package)\n* \/merge - I will send a random picture related to the word 'merge'\n* \/motivation - I will send a randomly generated motivational image\n* \/paper - I will play rock paper scissors with you\n* \/rock - I will play rock paper scissors with you\n* \/scissors - I will play rock paper scissors with you\n* \/shipit - I will send a image related to the phrase 'ship it'\n* \/slap [name] - I will slap the provided person a bit with large trout\n* \/source - I will link you to the GitHub repository which contains my source files\n* \/space - I will send you the current status of the hackerspace in Bamberg, Germany\n* \/weather [location] - I will send you the weather forecast for today for the provided location (from wttr.in)\n* \/who [message] - (should be used in a group) I will select a random user of a group and display the users name with the provided message\n");
 });
@@ -499,10 +498,46 @@ schedule.scheduleJob('*/5 * * * *', function () {
 			} else {
 				warnMessage="*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName+"\n\n"+obj.warnings[warnArea][0].description
 			};
-			if (lastWarning!==warnMessage) {
-				bot.sendMessage(config.warningChatId, warnMessage,{parse_mode: "Markdown"});
-				lastWarning=warnMessage;
+			for(i in users.users){
+				if(users.users[i].subscribed){
+					if (lastWarning!==warnMessage) {
+						bot.sendMessage(users.users[i].userID, warnMessage,{parse_mode: "Markdown"});
+						lastWarning=warnMessage;
+					};	
+				};
 			};
 		});
 	});
 });
+
+bot.onText(/\/subscribe/,(msg)=>{
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
+	for(i in users.users){
+		if(users.users[i].userID===msg.from.id){
+			if(!users.users[i].subscribed){
+				users.users[i].subscribed=true;
+				bot.sendMessage(msg.from.id,'You are now subscribed to weather warnings.');
+			} else {
+				bot.sendMessage(msg.from.id,'You are already subscribed to weather warnings.');		
+			}
+		}
+	}
+	var json = JSON.stringify(users);
+	fs.writeFile('users.json', json);
+})
+
+bot.onText(/\/unsubscribe/,(msg)=>{
+	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
+	for(i in users.users){
+		if(users.users[i].userID===msg.from.id){
+			if(users.users[i].subscribed){
+				users.users[i].subscribed=false;
+				bot.sendMessage(msg.from.id,'You are now unsubscribed to weather warnings.');
+			} else {
+				bot.sendMessage(msg.from.id,'You are already unsubscribed to weather warnings.');		
+			}
+		}
+	}
+	var json = JSON.stringify(users);
+	fs.writeFile('users.json', json);
+})
