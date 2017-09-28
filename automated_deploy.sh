@@ -12,13 +12,13 @@ echo "`date` [NPM] update done" | tee -a log.txt
 echo "`date` [NPM] npm start" | tee -a log.txt
 npm start &
 
+echo "" | tee -a log.txt
+echo "" | tee -a log.txt
+
 while [ 1 ]; do
         git fetch origin
 
         reslog=$(git log HEAD..origin/master --oneline)
-
-        echo "" | tee -a log.txt
-        echo "" | tee -a log.txt
 
         if [ "${reslog}" != "" ]; then
                 echo "`date` [GIT] new commit detected" | tee -a log.txt
@@ -55,6 +55,10 @@ while [ 1 ]; do
                 echo "`date` [BOT] Starting Bot again" | tee -a log.txt
                 echo "" | tee -a log.txt
                 npm start &
+
+                echo "" | tee -a log.txt
+                echo "" | tee -a log.txt
+                
         fi
 
         sleep 1m
