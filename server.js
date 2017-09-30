@@ -34,7 +34,7 @@ function saveUser(username, firstname, UserID) {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/greet (.+)/, (msg, input) => {
+bot.onText(/.*\/greet (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	var blub = input[1];
@@ -48,7 +48,7 @@ bot.onText(/\/greet (.+)/, (msg, input) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
+bot.onText(/.*\/lorem/ || /.*\/lorem (.*)/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var loremSettings = {
 		url: 'http://lorempixel.com/400/200',
@@ -68,7 +68,7 @@ bot.onText(/\/lorem/ || /\/lorem (.*)/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/doit/, (msg) => {
+bot.onText(/.*\/doit/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	bot.sendPhoto(chatId, contents.doit[Math.floor(Math.random() * contents.doit.length)].link);
@@ -80,7 +80,7 @@ bot.onText(/\/doit/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/ship/, (msg) => {
+bot.onText(/.*\/ship/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	bot.sendMessage(chatId, contents.ship[Math.floor(Math.random() * contents.ship.length)].link);
@@ -93,7 +93,7 @@ bot.onText(/\/ship/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/drawCard/, (msg) => {
+bot.onText(/.*\/drawCard/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
@@ -107,7 +107,7 @@ bot.onText(/\/drawCard/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/drawArt/, (msg) => {
+bot.onText(/.*\/drawArt/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let chatId = msg.chat.id;
 	let edition = contents.editions[Math.floor(Math.random() * contents.editions.length)];
@@ -120,7 +120,7 @@ bot.onText(/\/drawArt/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/💩/, (msg) => {
+bot.onText(/.*\/💩/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, 'Kothaufen');
@@ -132,7 +132,7 @@ bot.onText(/\/💩/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/merge/, (msg) => {
+bot.onText(/.*\/merge/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	bot.sendMessage(chatId, contents.merge[Math.floor(Math.random() * contents.merge.length)].link);
@@ -170,7 +170,7 @@ var downloader = function (uri, filename, callback) {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/weather (.+)/, (msg, input) => {
+bot.onText(/.*\/weather (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	var loc = input[1];
@@ -196,7 +196,7 @@ function sendingWeather(chatId, loc, photo) {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/decide (.+)/, (msg, input) => {
+bot.onText(/.*\/decide (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	var answer = Math.random() >= 0.5 ? "Yes" : "No";
@@ -209,7 +209,7 @@ bot.onText(/\/decide (.+)/, (msg, input) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/burn/, (msg) => {
+bot.onText(/.*\/burn/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "https://i.giphy.com/media/l2YWsiql5xGPIbnzy/giphy.gif");
@@ -221,7 +221,7 @@ bot.onText(/\/burn/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/slap (.+)/, (msg, input) => {
+bot.onText(/.*\/slap (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatID = msg.chat.id;
 	bot.sendMessage(chatID, "<b>" + msg.from.first_name + " slaps " + input[1] + " around a bit with a large trout</b>", { parse_mode: "HTML" });
@@ -233,7 +233,7 @@ bot.onText(/\/slap (.+)/, (msg, input) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/hype/, (msg) => {
+bot.onText(/.*\/hype/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id, msg.from.first_name + ' started a HYPE-Train!');
 	bot.sendPhoto(msg.chat.id, 'http://imgur.com/Ibx2NJs');
@@ -245,7 +245,7 @@ bot.onText(/\/hype/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/choose (.+)/, (msg, input) => {
+bot.onText(/.*\/choose (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var str = input[1];
 	var res = str.split(", ");
@@ -263,7 +263,7 @@ bot.onText(/\/choose (.+)/, (msg, input) => {
  *  The function sends a message according to the result of the game.
  */
 
-bot.onText(/\/scissors/, (msg) => {
+bot.onText(/.*\/scissors/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
@@ -285,7 +285,7 @@ bot.onText(/\/scissors/, (msg) => {
  *  The function sends a message according to the result of the game.
  */
 
-bot.onText(/\/rock/, (msg) => {
+bot.onText(/.*\/rock/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
@@ -307,7 +307,7 @@ bot.onText(/\/rock/, (msg) => {
  *  The function sends a message according to the result of the game.
  */
 
-bot.onText(/\/paper/, (msg) => {
+bot.onText(/.*\/paper/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	let sign = contents.sign[Math.floor(Math.random() * Object.keys(contents.sign).length)].name;
 	if (sign == 'scissors') {
@@ -326,7 +326,7 @@ bot.onText(/\/paper/, (msg) => {
  * @param {string} user - random user from the users array in the users.json.
  */
 
-bot.onText(/\/who (.+)/, (msg, input) => {
+bot.onText(/.*\/who (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	username = users.users[Math.floor(Math.random() * Object.keys(users.users).length)].first;
 	bot.sendMessage(msg.chat.id, '' + username + ' ' + input[1]);
@@ -339,7 +339,7 @@ bot.onText(/\/who (.+)/, (msg, input) => {
  * This function downloads the picture using the function downloader and sends it with a caption
  */
 
-bot.onText(/\/motivation/, (msg, input) => {
+bot.onText(/.*\/motivation/, (msg, input) => {
 	request.get("http://inspirobot.me/api?generate=true", (error, response, body) => {
 		if (error) {
 			console.log(`error getting inspiration ${error}`);
@@ -358,7 +358,7 @@ bot.onText(/\/motivation/, (msg, input) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/space/, (msg) => {
+bot.onText(/.*\/space/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var msgid;
 	var timerid;
@@ -400,7 +400,7 @@ bot.onText(/\/space/, (msg) => {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/(fact|cat)/,(msg) =>{
+bot.onText(/.*\/(fact|cat)/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	downloader("https://random.cat/meow","cat.json", function(){
@@ -418,7 +418,7 @@ bot.onText(/\/(fact|cat)/,(msg) =>{
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/source/,(msg)=>{
+bot.onText(/.*\/source/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id,"The source files are open source on GitHub: https://github.com/CptPie/telegram-shipit-bot/");
 });
@@ -430,7 +430,7 @@ bot.onText(/\/source/,(msg)=>{
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/math (.+)/,(msg, input) =>{
+bot.onText(/.*\/math (.+)/,(msg, input) =>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var mathrenderer = function (input,callback) {
 	var mjAPI = require("mathjax-node-svg2png");
@@ -468,7 +468,7 @@ bot.onText(/\/math (.+)/,(msg, input) =>{
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/help/,(msg) =>{
+bot.onText(/.*\/help/,(msg) =>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	bot.sendMessage(msg.chat.id,
 		"Hi there, I am a simple telegram bot named shipitbot. I can understand the following commands:\n* \/burn - I will burn the witch!\n* \/cat - I will send a random cat fact\n* \/choose [option 1],..., [option n] - I will help you to choose between any amount of options\n* \/decide [question] - I will decide for you (returns yes or no)\n* \/doit - I will send a random picture related to the meme 'Just do it!'\n* \/drawArt - I will send a random art from the early years of magic the gathering, cudos to magiccards.info\n* \/drawCard - I will send a random card from the early years of magic the gathering, cudos to magiccards.info\n* \/fact - I will send a random cat fact\n* \/greet [name] - I will greet the provided name!\n* \/help - I will display this message\n* \/hype - I will start the hype train for you\n* \/lorem - I will send a random picture provided by lorempixel.com\n* \/math [formula] - I will send you a nicely rendered picture of your formula (I can even understand LaTeX commands, provided they are from the amsmath package)\n* \/merge - I will send a random picture related to the word 'merge'\n* \/motivation - I will send a randomly generated motivational image\n* \/paper - I will play rock paper scissors with you\n* \/rock - I will play rock paper scissors with you\n* \/scissors - I will play rock paper scissors with you\n* \/shipit - I will send a image related to the phrase 'ship it'\n* \/slap [name] - I will slap the provided person a bit with large trout\n* \/source - I will link you to the GitHub repository which contains my source files\n* \/space - I will send you the current status of the hackerspace in Bamberg, Germany\n* \/weather [location] - I will send you the weather forecast for today for the provided location (from wttr.in)\n* \/who [message] - (should be used in a group) I will select a random user of a group and display the users name with the provided message\n");
@@ -510,7 +510,7 @@ schedule.scheduleJob('*/5 * * * *', function () {
 	});
 });
 
-bot.onText(/\/subscribe/,(msg)=>{
+bot.onText(/.*\/subscribe/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	for(i in users.users){
 		if(users.users[i].userID===msg.from.id){
@@ -526,7 +526,7 @@ bot.onText(/\/subscribe/,(msg)=>{
 	fs.writeFile('users.json', json);
 })
 
-bot.onText(/\/unsubscribe/,(msg)=>{
+bot.onText(/.*\/unsubscribe/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	for(i in users.users){
 		if(users.users[i].userID===msg.from.id){
