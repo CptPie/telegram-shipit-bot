@@ -12,9 +12,9 @@ npm start 2>&1 | tee -a log.txt &
 while [ 1 ]; do
         git fetch origin
 
-        reslog=$(git log HEAD..origin/master --oneline)
+        reslog=`git log HEAD..origin/master --oneline`
 
-        if [ "${reslog}" != "" ]; then
+        if [ -n "$reslog" ]; then
                 echo "`date` [GIT] new commit detected" | tee -a log.txt
                 echo "`date` [PREP] preparing for merge" | tee -a log.txt
                 
@@ -36,7 +36,6 @@ while [ 1 ]; do
 
                 echo "`date` [BOT] Starting Bot again" | tee -a log.txt
                 npm start 2>&1 | tee -a log.txt &
-                
         fi
 
         sleep 1m
