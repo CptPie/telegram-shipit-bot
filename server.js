@@ -29,7 +29,7 @@ function saveUser(username, firstname, UserID) {
 };
 
 /**
- * This function only triggers if the regex \/\greet (.+)/ is met. (.+) stands for the provided input by the user.
+ * This function only triggers if the regex /.*\/greet (.+)/ is met. (.+) stands for the provided input by the user.
  * The function sends a message in the format: 'Hello [input]'.
  * This function also uses the saveUser function to save any users in the users.json.
  */
@@ -44,11 +44,11 @@ bot.onText(/.*\/greet (.+)/, (msg, input) => {
 
 /**
  * This function sends a random picture provided by lorempixel.com.
- * The funciton only triggers if the regex \/\lorem/ or \/\lorem (.+)/ is met.
+ * The funciton only triggers if the regex /.*\/lorem/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/.*\/lorem/ || /.*\/lorem (.*)/, (msg) => {
+bot.onText(/.*\/lorem/, (msg) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	var loremSettings = {
 		url: 'http://lorempixel.com/400/200',
@@ -64,7 +64,7 @@ bot.onText(/.*\/lorem/ || /.*\/lorem (.*)/, (msg) => {
 
 /**
  * This function sends a random picture/gif provided by the array 'doit' in the contents.json.
- * The function only triggers if the regex /\/doit/ is met.
+ * The function only triggers if the regex /.*\/doit/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -76,7 +76,7 @@ bot.onText(/.*\/doit/, (msg) => {
 
 /**
  * This function sends a random picture/gif provided by the array 'ship' in the contents.json.
- * The function only triggers if the regex /\/ship/ is met.
+ * The function only triggers if the regex /.*\/ship/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -89,7 +89,7 @@ bot.onText(/.*\/ship/, (msg) => {
 /**
  * This funciton sends a random card from a random edition provided by the array 'editions' in the contents.json.
  * Cards provided by http://magiccards.info.
- * The function only triggers if the regex /\/drawCard/ is met.
+ * The function only triggers if the regex /.*\/drawCard/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -103,7 +103,7 @@ bot.onText(/.*\/drawCard/, (msg) => {
 /**
  * This function sends a random cardart from a random edition provides by the array 'editions' in the contents.json.
  * Cardarts provided by http://magiccards.info.
- * The function only triggers if the regex \/\drawArt/ is met.
+ * The function only triggers if the regex /.*\/drawArt/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -128,7 +128,7 @@ bot.onText(/.*\/💩/, (msg) => {
 
 /**
  * This function sends a random picture/gif provided by the array 'merge' in the contents.json.
- * The function only triggers if the regex /\/merge/ is met.
+ * The function only triggers if the regex /.*\/merge/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -166,7 +166,7 @@ var downloader = function (uri, filename, callback) {
 /**
  * This function sends the weather forecast for the provided location.
  * Weather forecast by http://wttr.in.
- * The function triggers if the regex /\/weather (.+)/ is met, (.+) is the input which contains the location for the forecast.
+ * The function triggers if the regex /.*\/weather (.+)/ is met, (.+) is the input which contains the location for the forecast.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -192,7 +192,7 @@ function sendingWeather(chatId, loc, photo) {
 
 /**
  * This function answers to the input with 'yes' or 'no'
- * The function triggers if the regex \/\decide (.+)/ is met, (.+) is the input to which the bot answers.
+ * The function triggers if the regex /.*\/decide (.+)/ is met, (.+) is the input to which the bot answers.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -205,7 +205,7 @@ bot.onText(/.*\/decide (.+)/, (msg, input) => {
 
 /**
  * This function send a gif.
- * The function triggers if the regex \/\burn/ is met.
+ * The function triggers if the regex /.*\/burn/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -217,7 +217,7 @@ bot.onText(/.*\/burn/, (msg) => {
 
 /**
  * This function sends a message.
- * The function triggers if the regex \/\slap (.+)/ is met, (.+) is the input which is used in the message.
+ * The function triggers if the regex /.*\/slap (.+)/ is met, (.+) is the input which is used in the message.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -229,7 +229,7 @@ bot.onText(/.*\/slap (.+)/, (msg, input) => {
 
 /**
  * This functions sends a photo.
- * The function triggers if the regex \/\hype/ is met.
+ * The function triggers if the regex /.*\/hype/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -241,7 +241,7 @@ bot.onText(/.*\/hype/, (msg) => {
 
 /**
  * This function takes one input, splits it on the comma, and sends one random element of the split input.
- * The function triggers if the regex \/\choose (.+)/ is met, (.+) is the input which is split.
+ * The function triggers if the regex /.*\/choose (.+)/ is met, (.+) is the input which is split.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -255,7 +255,7 @@ bot.onText(/.*\/choose (.+)/, (msg, input) => {
 
 /**
  * This function is one of the three required functions needed for the rock paper scissors game with the bot.
- * The function only triggers if the regex \/\scissors/ is met.
+ * The function only triggers if the regex /.*\/scissors/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  * 
  * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
@@ -277,7 +277,7 @@ bot.onText(/.*\/scissors/, (msg) => {
 
 /**
  * This function is one of the three required functions needed for the rock paper scissors game with the bot.
- * The function only triggers if the regex \/\rock/ is met.
+ * The function only triggers if the regex /.*\/rock/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  * 
  * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
@@ -299,7 +299,7 @@ bot.onText(/.*\/rock/, (msg) => {
 
 /**
  * This function is one of the three required functions needed for the rock paper scissors game with the bot.
- * The function only triggers if the regex \/\paper/ is met.
+ * The function only triggers if the regex /.*\/paper/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  * 
  * @param {string} sign - one of the three signs in rock paper scissors randomly selected from the array sing in the contents.json.
@@ -321,7 +321,7 @@ bot.onText(/.*\/paper/, (msg) => {
 
 /**
  * This function uses the user list in the users.json file to select a random user and append the input.
- * The function only triggers if the regex \/\who (.+)/ is met, (.+) is the input which is later used.
+ * The function only triggers if the regex /.*\/who (.+)/ is met, (.+) is the input which is later used.
  * This function also uses the saveUser function to save any users in the users.json.
  * @param {string} user - random user from the users array in the users.json.
  */
@@ -335,7 +335,7 @@ bot.onText(/.*\/who (.+)/, (msg, input) => {
 /**
  * This function sends a randomly generated motivational picture from http://inspirobot.me.
  * This function also uses the saveUser function to save any users in the users.json.
- * The function only triggers if the regex \/\motivation/ is met.
+ * The function only triggers if the regex /.*\/motivation/ is met.
  * This function downloads the picture using the function downloader and sends it with a caption
  */
 
@@ -353,7 +353,7 @@ bot.onText(/.*\/motivation/, (msg, input) => {
 
 /**
  * This function sends the status of the Backspace Bamberg e.V. facitlities.
- * The function only triggers if the regex \/\space/ is met.
+ * The function only triggers if the regex /.*\/space/ is met.
  * The function sends and edites messages and finally sends a picture from the server of the Backspace e.V.
  * This function also uses the saveUser function to save any users in the users.json.
  */
@@ -393,7 +393,7 @@ bot.onText(/.*\/space/, (msg) => {
 
 /**
  * This function sends a random cat fact and cat picture.
- * The function only triggers if the regex \/\(fact|cat)/ is met.
+ * The function only triggers if the regex /.*\/(fact|cat)/ is met.
  * It downloads a randomly provided picture from https://random.cat/meow.
  * It also uses the catFacts api to get a random catFact.
  * The function sends the downloaded picture together with the fact from the api
@@ -414,7 +414,7 @@ bot.onText(/.*\/(fact|cat)/,(msg) =>{
 
 /**
  * This function sends a link to the sourcefiles on github.com
- * The function only triggers if the regex /\/source/ is met.
+ * The function only triggers if the regex /.*\/source/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -425,7 +425,7 @@ bot.onText(/.*\/source/,(msg)=>{
 
 /**
  * This function takes math expressions in the LaTeX format, renders them as svg and converts this svg to a png and sends it as photo.
- * The function only triggers if the regex \/\math (.+)/ is met, (.+) is the input which should be converted into a png.
+ * The function only triggers if the regex /.*\/math (.+)/ is met, (.+) is the input which should be converted into a png.
  * The function uses the mathjax-node-svg2png api to render the math expression as png file.
  * This function also uses the saveUser function to save any users in the users.json.
  */
@@ -464,7 +464,7 @@ bot.onText(/.*\/math (.+)/,(msg, input) =>{
 
 /**
  * This function is a simple help command which lists all aviable commands to be used by users.
- * The function only triggers if the regex \/\help/ is met.
+ * The function only triggers if the regex /.*\/help/ is met.
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
@@ -476,7 +476,7 @@ bot.onText(/.*\/help/,(msg) =>{
 
 /**
  * This function sends weather warnings for the area code provided from the config.json.
- * The function triggers every full hour (servertime) and downloads the current list of warnings from dwd.de.
+ * The function triggers every 5 minutes (minute%5==0, servertime) and downloads the current list of warnings from dwd.de.
  * The function then cleans the downloaded file, searches for the provided area code, checks if it is not only a fog warning and then sends 2 messages containing the warning.
  */
 
@@ -510,6 +510,12 @@ schedule.scheduleJob('*/5 * * * *', function () {
 	});
 });
 
+/**
+ * This function is used to subscribe to the automatic weather warnings.
+ * The function only triggers if the regex /.*\/subscribe/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
+
 bot.onText(/.*\/subscribe/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	for(i in users.users){
@@ -525,6 +531,12 @@ bot.onText(/.*\/subscribe/,(msg)=>{
 	var json = JSON.stringify(users);
 	fs.writeFile('users.json', json);
 })
+
+/**
+ * This function is used to unsubscribe to the automatic weather warnings.
+ * The function only triggers if the regex /.*\/unsubscribe/ is met.
+ * This function also uses the saveUser function to save any users in the users.json.
+ */
 
 bot.onText(/.*\/unsubscribe/,(msg)=>{
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
