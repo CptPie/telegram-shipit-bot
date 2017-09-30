@@ -34,7 +34,7 @@ function saveUser(username, firstname, UserID) {
  * This function also uses the saveUser function to save any users in the users.json.
  */
 
-bot.onText(/\/greet (.+)/, (msg, input) => {
+bot.onText(/.*\/greet (.+)/, (msg, input) => {
 	saveUser(msg.from.username, msg.from.first_name, msg.from.id);
 	const chatId = msg.chat.id;
 	var blub = input[1];
