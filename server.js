@@ -3,10 +3,21 @@ const request = require('request');
 const schedule = require('node-schedule');
 const fs = require('fs');
 const config = require('./config');
-const bot = new TelegramBot(config.bottoken, { polling: true });
 const contents = require('./contents');
 const catFacts = require('cat-facts');
 var users = require('./users')
+const bot = new TelegramBot(config.bottoken);
+bot.getMe()
+	.then((info) => {
+      bot.startPolling();
+    })
+    .catch((e) => {
+        console.log('Bottoken is invalid, check your token in config.json.');
+        process.exit();
+    });
+
+
+
 /**
  * @param  {string} username - the username to be saved
  * @param  {string} firstname - the firstname to be saved	
