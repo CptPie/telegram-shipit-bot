@@ -493,10 +493,10 @@ schedule.scheduleJob('*/5 * * * *', function () {
 			};
 			dataClean=data.substring(24,data.length-2);		//hardcoded substring is not optimal but works for now
 			obj = JSON.parse(dataClean);
-			if (obj.warnings[warnArea]==undefined){
+			if (obj.warnings[warnArea]==undefined || obj.warnings[warnArea][0].headline.indexOf('nebel')==-1){
 				warnMessage="*"+"No more warnings for your area."+"*";
 			} else {
-				warnMessage="*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName+"\n\n"+obj.warnings[warnArea][0].description
+				warnMessage="*"+obj.warnings[warnArea][0].headline+"*"+" fuer "+obj.warnings[warnArea][0].regionName+"\n\n"+obj.warnings[warnArea][0].description;
 			};
 			for(i in users.users){
 				if(users.users[i].subscribed){
