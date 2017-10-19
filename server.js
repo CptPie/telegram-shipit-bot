@@ -16,6 +16,25 @@ bot.getMe()
         process.exit();
     });
 
+/* This might work or it won't, unable to test it at the moment.
+ * This function triggers on a polling error and sends a message to the console and therefore to the logfile.
+ * Afterwards it stops polling for 10 seconds and starts polling again (i don't know if it fixes the problem but it surly reduces the console spam.)
+ */
+
+bot.on('polling_error', (error) => {
+	var date = new Date()
+	console.log(date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+"/"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" Error: "+error.code+ " Telegram's Famous 502 Error.");  // => 'EFATAL'
+	bot.stopPolling().then(sleep(10000, bot.startPolling()));
+});
+
+
+function sleep(time, callback) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    callback();
+}
 
 
 /**
