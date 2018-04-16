@@ -25,6 +25,19 @@ bot.on('command', (chat, data, from, messageId, text, command, commandData) => {
 		bot.sendText(chat.id, 'Hello '+commandData)
 		return;
 	}
-	
+	if (command === 'bet'){
+		bot.sendText(chat.id,'Please send your bet description');
+		bot.on('text',(chat, date, from, messageId, innerText) =>{
+			var input = null;
+			while(input===null){
+			if(!innerText==='/bet'){
+				input=innerHeight;
+				bot.sendText(chat.id,input);
+			}
+
+		}
+		return;
+		});	
+	}
 })
 
