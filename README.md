@@ -1,4 +1,5 @@
 # Telegram Ship-it Bot
+This bot uses the https://github.com/yagop/node-telegram-bot-api API.\
 Simple telegram bot with some random basic capabilities, see below for more information.\
 The bot also sends daily at 5:30 am the weather forecast for the provided location (see config.json).
 
